@@ -1,0 +1,43 @@
+.container {
+  position: fixed;
+  width: 220px;
+  height: 220px;
+  z-index: 999;
+  pointer-events: none;
+  bottom: -200px;
+  left: -200px;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.4))
+          drop-shadow(0 0 22px rgba(110, 30, 180, 0.22));
+  animation: flyAcross 3.2s cubic-bezier(0.25, 0.1, 0.35, 1) forwards;
+}
+
+.ravenImage {
+  animation: wingFlap 0.34s ease-in-out infinite;
+}
+
+@keyframes wingFlap {
+  0%   { transform: scaleY(1); }
+  50%  { transform: scaleY(0.82); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes flyAcross {
+  0% {
+    bottom: -200px;
+    left: -200px;
+    transform: rotate(18deg) scale(1.05);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    bottom: 112vh;
+    left: 112vw;
+    transform: rotate(26deg) scale(0.32);
+    opacity: 0;
+  }
+}

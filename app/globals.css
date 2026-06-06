@@ -8,8 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-alice);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +18,39 @@
   }
 }
 
-body {
+html, body {
+  overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-alice), serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading), serif;
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-heading), serif;
+  }
+}
+
+.gothic-btn-text {
+  color: #ffffff;
+  text-shadow: 0 0 8px #fff, 0 0 20px #fff, 0 0 40px #7eb8f7, 0 0 80px #7eb8f7;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.gothic-btn svg {
+  overflow: visible;
+  transition: filter 0.2s ease;
+}
+
+.gothic-btn:hover svg {
+  filter: drop-shadow(0 0 8px #f5cccc) drop-shadow(0 0 24px #ff0000) drop-shadow(0 0 48px #ff0000);
+}
+
+.gothic-btn:hover .gothic-btn-text {
+  color: #a855f7;
+  text-shadow: 0 0 8px #160b0b, 0 0 20px #292222, 0 0 40px #2b1717, 0 0 80px #2c1e1e;
 }
