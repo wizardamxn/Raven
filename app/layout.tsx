@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Alex_Brush } from "next/font/google";
+import { ReactLenis } from "lenis/react";
+import MagicCursor from "@/components/MagicCursor";
+import MagicNavButton from "@/components/MagicNavButton";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 const alice = localFont({
@@ -10,6 +15,12 @@ const alice = localFont({
 const heading = localFont({
   src: "./fonts/heading.ttf",
   variable: "--font-heading",
+});
+
+const script = Alex_Brush({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-script",
 });
 
 export const metadata: Metadata = {
@@ -25,9 +36,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${alice.variable} ${heading.variable} h-full antialiased`}
+      className={`${alice.variable} ${heading.variable} ${script.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
+          <MagicCursor />
+          <MagicNavButton />
+          {children}
+        </ReactLenis>
+      </body>
     </html>
   );
 }

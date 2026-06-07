@@ -1,12 +1,17 @@
 import MagicRaven from "@/components/MagicRaven";
+import GothicTree from "@/components/GothicTree";
 import ResumeButton from "@/components/ResumeButton";
 import GothicButton from "@/components/GothicButton";
 import Image from "next/image";
+import Link from "next/link";
 import { experiences } from "@/lib/data/experience";
 import { projects } from "@/lib/data/projects";
 import { getGithubContributions } from "@/lib/data/github";
 import { getValorantStats } from "@/lib/data/valorant";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { FiExternalLink, FiGithub, FiArrowRight } from "react-icons/fi";
+import ArcaneWidgets from "@/components/ArcaneWidget";
+import Footer from "@/components/Footer";
+import RelicsSection from "@/components/Projects";
 
 export default async function Home() {
   const [contributions, valorant] = await Promise.all([
@@ -18,6 +23,7 @@ export default async function Home() {
     // Deep dark void background
     <div className="flex flex-col min-h-screen items-center justify-start bg-[#040406] font-sans text-zinc-200 pt-44 pb-24 selection:bg-purple-900/60 selection:text-purple-200">
       <MagicRaven />
+      <GothicTree />
 
       {/* THE ANCIENT MONOLITH CONTAINER */}
       <main
@@ -38,7 +44,7 @@ export default async function Home() {
         </div>
 
         {/* ================= 1. THE CENTRAL EMBLEM (AVATAR) ================= */}
-        <div className="relative my-4">
+        <div id="sanctum" className="relative my-4 scroll-mt-28">
           {/* Outer glowing magic circle background */}
           <div className="absolute inset-0 rounded-full bg-purple-600/10 blur-xl scale-125 animate-pulse" />
 
@@ -212,7 +218,7 @@ export default async function Home() {
         </div>
 
         {/* ================= 5. CHRONICLES OF MASTERY (EXPERIENCE) ================= */}
-        <div className="w-full text-left max-w-xl">
+        <div id="chronicles" className="w-full text-left max-w-xl scroll-mt-28">
           <span className="block text-center text-base tracking-[0.4em] text-purple-500/70 uppercase font-black mb-2">
             Past Campaigns
           </span>
@@ -276,94 +282,45 @@ export default async function Home() {
               </div>
             ))}
           </div>
-        </div>
 
-        {/* ================= 6. RELICS OF CREATION (PROJECTS) ================= */}
-        <div className="w-full text-left max-w-xl mt-16 pt-8 border-t border-purple-950/20">
-          <span className="block text-center text-base tracking-[0.4em] text-purple-500/70 uppercase font-black mb-2">
-            Forged Artifacts
-          </span>
-          <h2
-            className="font-heading text-4xl font-black tracking-wide text-center mb-10
-                         text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500"
-          >
-            Relics of Creation
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {projects.map((project) => (
-              <div key={project.id} className="flex flex-col">
-                {/* Gothic-framed project image */}
-                <div className="relative aspect-video">
-                  <div className="absolute inset-0 rounded-xl bg-purple-600/10 blur-xl scale-105" />
-                  <div className="relative w-full h-full rounded-xl p-[3px] bg-linear-to-b from-purple-900/50 via-zinc-800 to-purple-950/40 shadow-xl">
-                    <div className="relative w-full h-full rounded-[10px] overflow-hidden bg-zinc-900">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="pointer-events-none absolute top-1 left-1 w-5 h-5 border-t-2 border-l-2 border-purple-500/50 rounded-tl-md" />
-                    <span className="pointer-events-none absolute top-1 right-1 w-5 h-5 border-t-2 border-r-2 border-purple-500/50 rounded-tr-md" />
-                    <span className="pointer-events-none absolute bottom-1 left-1 w-5 h-5 border-b-2 border-l-2 border-purple-500/50 rounded-bl-md" />
-                    <span className="pointer-events-none absolute bottom-1 right-1 w-5 h-5 border-b-2 border-r-2 border-purple-500/50 rounded-br-md" />
-                  </div>
-                </div>
-
-                <h3 className="font-heading text-xl font-black tracking-wide text-zinc-100 mt-4">
-                  {project.title}
-                </h3>
-                <p className="text-zinc-400 text-lg leading-relaxed mt-2">
-                  {project.description}
-                </p>
-
-                <div className="flex flex-wrap gap-3 mt-4">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech.name}
-                      title={tech.name}
-                      className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-purple-950/40 text-purple-400/80"
-                    >
-                      <tech.icon className="w-5 h-5" />
-                    </span>
-                  ))}
-                </div>
-
-                {(project.liveUrl || project.repoUrl) && (
-                  <div className="flex gap-3 mt-4">
-                    {project.liveUrl && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="View live demo"
-                        className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-purple-950/40 text-purple-400/80 transition-colors hover:text-purple-300 hover:border-purple-500/50 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]"
-                      >
-                        <FiExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                    {project.repoUrl && (
-                      <a
-                        href={project.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title="View source code"
-                        className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-purple-950/40 text-purple-400/80 transition-colors hover:text-purple-300 hover:border-purple-500/50 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]"
-                      >
-                        <FiGithub className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/experience"
+              className="group inline-flex items-center gap-2 text-base tracking-[0.15em] uppercase font-bold text-purple-400/80 transition-colors hover:text-purple-300 hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]"
+            >
+              View the Full Chronicles
+              <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
+        {/* Separator */}
+        <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
+          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-purple-900/50" />
+          <div className="h-[1px] w-16 bg-gradient-to-r from-purple-900/50 to-purple-500" />
+          <span className="text-2xl tracking-widest text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
+            ❖ ✧ ☠ ✧ ❖
+          </span>
+          <div className="h-[1px] w-16 bg-gradient-to-l from-purple-900/50 to-purple-500" />
+          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-purple-900/50" />
+        </div>
+        {/* ================= 6. RELICS OF CREATION (PROJECTS) ================= */}
+        <RelicsSection projects={projects} />
 
+        {/* Separator */}
+        <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
+          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-purple-900/50" />
+          <div className="h-[1px] w-16 bg-gradient-to-r from-purple-900/50 to-purple-500" />
+          <span className="text-2xl tracking-widest text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
+            ❖ ✧ ☠ ✧ ❖
+          </span>
+          <div className="h-[1px] w-16 bg-gradient-to-l from-purple-900/50 to-purple-500" />
+          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-purple-900/50" />
+        </div>
         {/* ================= 7. RECORDS OF THE REALM (GITHUB + VALORANT) ================= */}
-        <div className="w-full text-left max-w-xl mt-16 pt-8 border-t border-purple-950/20">
+        <div
+          id="records"
+          className="w-full text-left max-w-xl mt-16 pt-8 border-t border-purple-950/20 scroll-mt-28"
+        >
           <span className="block text-center text-base tracking-[0.4em] text-purple-500/70 uppercase font-black mb-2">
             Living Archives
           </span>
@@ -373,109 +330,12 @@ export default async function Home() {
 
           <div className="flex flex-col gap-12">
             {/* Widget A — GitHub contributions heatmap */}
-            <div className="flex flex-col">
-              <h3 className="font-heading text-xl font-black tracking-wide text-zinc-100 mb-1">
-                Commit Sigils
-              </h3>
-              <p className="text-zinc-400 text-lg leading-relaxed mb-4">
-                A year of arcane labor, etched into the archive of{" "}
-                <span className="text-purple-400/90">@{contributions?.username ?? "Valtryek"}</span>.
-              </p>
-
-              {contributions ? (
-                <div className="relative rounded-xl p-[1px] bg-linear-to-b from-purple-900/50 via-zinc-800 to-purple-950/40 shadow-xl">
-                  <div className="rounded-[11px] bg-zinc-950/80 p-4 overflow-x-auto">
-                    <div className="flex gap-[3px] w-max">
-                      {contributions.weeks.map((week, weekIndex) => (
-                        <div key={weekIndex} className="flex flex-col gap-[3px]">
-                          {week.map((day, dayIndex) => {
-                            const levelClasses: Record<number, string> = {
-                              0: "bg-zinc-900/60 border-purple-950/30",
-                              1: "bg-purple-950/50 border-purple-900/40",
-                              2: "bg-purple-800/60 border-purple-700/40",
-                              3: "bg-purple-600/80 border-purple-500/50 drop-shadow-[0_0_4px_rgba(168,85,247,0.5)]",
-                              4: "bg-purple-500 border-purple-400/60 drop-shadow-[0_0_6px_rgba(168,85,247,0.8)]",
-                            };
-                            return (
-                              <span
-                                key={dayIndex}
-                                title={day.date ? `${day.count} contributions on ${day.date}` : undefined}
-                                className={`w-[10px] h-[10px] rounded-[2px] border ${levelClasses[day.level]}`}
-                              />
-                            );
-                          })}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-end gap-2 mt-4 text-zinc-500 text-sm">
-                      <span>Faint</span>
-                      <span className="w-[10px] h-[10px] rounded-[2px] border bg-zinc-900/60 border-purple-950/30" />
-                      <span className="w-[10px] h-[10px] rounded-[2px] border bg-purple-950/50 border-purple-900/40" />
-                      <span className="w-[10px] h-[10px] rounded-[2px] border bg-purple-800/60 border-purple-700/40" />
-                      <span className="w-[10px] h-[10px] rounded-[2px] border bg-purple-600/80 border-purple-500/50" />
-                      <span className="w-[10px] h-[10px] rounded-[2px] border bg-purple-500 border-purple-400/60" />
-                      <span>Ablaze</span>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="rounded-xl border border-purple-950/30 bg-zinc-950/60 px-6 py-10 text-center text-zinc-500 text-lg">
-                  The commit-spirits are silent for now.
-                </div>
-              )}
-            </div>
-
-            {/* Widget B — Valorant stat card */}
-            <div className="flex flex-col">
-              <h3 className="font-heading text-xl font-black tracking-wide text-zinc-100 mb-1">
-                Battlefield Standing
-              </h3>
-              <p className="text-zinc-400 text-lg leading-relaxed mb-4">
-                Skirmishes fought under the banner of Valorant.
-              </p>
-
-              {valorant ? (
-                <div className="relative rounded-xl p-[1px] bg-linear-to-b from-purple-900/50 via-zinc-800 to-purple-950/40 shadow-xl">
-                  <div className="rounded-[11px] bg-zinc-950/80 p-6 flex items-center gap-6">
-                    {valorant.rankIconUrl && (
-                      <div className="relative w-16 h-16 shrink-0 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">
-                        <Image src={valorant.rankIconUrl} alt={valorant.currentTier} fill className="object-contain" />
-                      </div>
-                    )}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 flex-wrap">
-                        <span className="font-heading text-xl font-black tracking-wide text-zinc-100">
-                          {valorant.riotName}
-                          <span className="text-purple-500/70">#{valorant.riotTag}</span>
-                        </span>
-                        <span className="text-xs font-black tracking-widest uppercase px-2 py-1 rounded-md bg-purple-950/50 border border-purple-800/40 text-purple-300/90">
-                          LVL {valorant.accountLevel}
-                        </span>
-                      </div>
-                      <p className="text-purple-400/90 text-lg mt-1">{valorant.currentTier}</p>
-                      <div className="flex flex-wrap gap-x-6 gap-y-1 mt-2 text-zinc-400 text-base">
-                        <span>RR <span className="text-zinc-200">{valorant.rr}</span></span>
-                        <span>Elo <span className="text-zinc-200">{valorant.elo}</span></span>
-                        <span>
-                          Last Match{" "}
-                          <span className={valorant.mmrChange >= 0 ? "text-green-400" : "text-red-400"}>
-                            {valorant.mmrChange >= 0 ? "+" : ""}
-                            {valorant.mmrChange}
-                          </span>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="rounded-xl border border-purple-950/30 bg-zinc-950/60 px-6 py-10 text-center text-zinc-500 text-lg">
-                  The sigil remains unattuned.
-                </div>
-              )}
-            </div>
+            <ArcaneWidgets contributions={contributions} valorant={valorant} />
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   );
 }
