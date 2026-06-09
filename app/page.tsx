@@ -1,6 +1,5 @@
 import MagicRaven from "@/components/MagicRaven";
 import GothicTree from "@/components/GothicTree";
-import ResumeButton from "@/components/ResumeButton";
 import GothicButton from "@/components/GothicButton";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,10 +7,14 @@ import { experiences } from "@/lib/data/experience";
 import { projects } from "@/lib/data/projects";
 import { getGithubContributions } from "@/lib/data/github";
 import { getValorantStats } from "@/lib/data/valorant";
-import { FiExternalLink, FiGithub, FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiFileText } from "react-icons/fi";
+import { GiRaven } from "react-icons/gi";
 import ArcaneWidgets from "@/components/ArcaneWidget";
 import Footer from "@/components/Footer";
 import RelicsSection from "@/components/Projects";
+import Skills from "@/components/Skills";
+import Testimonials from "@/components/Testimonials";
+import Contact from "@/components/Contact";
 
 export default async function Home() {
   const [contributions, valorant] = await Promise.all([
@@ -21,14 +24,14 @@ export default async function Home() {
 
   return (
     // Deep dark void background
-    <div className="flex flex-col min-h-screen items-center justify-start bg-[#040406] font-sans text-zinc-200 pt-44 pb-24 selection:bg-purple-900/60 selection:text-purple-200">
+    <div className="flex flex-col min-h-screen items-center justify-start bg-[#040406] font-sans text-zinc-200 pt-44 pb-24 selection:bg-zinc-700/60 selection:text-zinc-100">
       <MagicRaven />
       <GothicTree />
 
       {/* THE ANCIENT MONOLITH CONTAINER */}
       <main
         className="flex w-full max-w-2xl flex-col items-center bg-linear-to-b from-[#0a0a0f] to-black py-20 px-8 sm:px-12
-                       border border-purple-950/30 border-t-0
+                       border border-zinc-800/60 border-t-0
                        shadow-[0_25px_60px_rgba(0,0,0,0.9)]
                        relative z-10 text-center"
       >
@@ -45,11 +48,8 @@ export default async function Home() {
 
         {/* ================= 1. THE CENTRAL EMBLEM (AVATAR) ================= */}
         <div id="sanctum" className="relative my-4 scroll-mt-28">
-          {/* Outer glowing magic circle background */}
-          <div className="absolute inset-0 rounded-full bg-purple-600/10 blur-xl scale-125 animate-pulse" />
-
           {/* Detailed circular frame */}
-          <div className="relative w-40 h-40 rounded-full p-1 bg-linear-to-b from-purple-900/50 via-zinc-800 to-purple-950/40 shadow-2xl">
+          <div className="relative w-40 h-40 rounded-full p-1 bg-zinc-800 shadow-lg">
             <div className="w-full h-full rounded-full overflow-hidden relative">
               <Image
                 src="/avatar.png"
@@ -60,15 +60,15 @@ export default async function Home() {
               />
             </div>
           </div>
-          {/* Floating crystal decoration indicator */}
-          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-zinc-900 border border-purple-500/40 text-sm tracking-[0.2em] uppercase px-3 py-0.5 rounded-full text-purple-300 shadow-md">
+          {/* Level indicator */}
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-zinc-900 border border-zinc-700 text-sm tracking-[0.2em] uppercase px-3 py-0.5 rounded-full text-zinc-300">
             LVL 21
           </div>
         </div>
 
         {/* ================= 2. THE SUMMONING HEADLINE ================= */}
         <div className="mt-8 flex flex-col items-center">
-          <span className="text-lg tracking-[0.5em] text-purple-500/70 uppercase font-black">
+          <span className="text-lg tracking-[0.5em] text-zinc-500 uppercase font-black">
             Arch-Mage of Code
           </span>
           <h1
@@ -77,26 +77,27 @@ export default async function Home() {
           >
             Aman Ahmad
           </h1>
-          <p className="mt-4 text-purple-400 text-xl sm:text-2xl tracking-widest uppercase bg-purple-950/20 border border-purple-900/30 px-4 py-1 rounded">
-            ✦ Full Stack Developer ✦
+          <p className="mt-4 text-zinc-300 text-md sm:text-lg tracking-widest uppercase bg-zinc-900/50 border border-zinc-800 px-4 py-1 rounded">
+            Full Stack Developer
           </p>
+        
         </div>
 
         {/* ================= 3. THE MYSTICAL CHRONICLES (BIO) ================= */}
-        <div className="w-full max-w-xl mt-16 text-left flex flex-col gap-10 border-t border-b border-purple-950/20 py-10">
+        <div className="w-full max-w-xl mt-16 text-left flex flex-col gap-10 border-t border-b border-zinc-800/60 py-10">
           {/* Log 01: The Craft */}
           <div className="flex gap-6 items-start group">
             <div className="flex flex-col items-center">
-              <span className="font-mono text-base tracking-widest text-purple-500/60 font-black">
+              <span className="font-mono text-base tracking-widest text-zinc-600 font-black">
                 01
               </span>
-              <div className="w-[1px] h-12 bg-linear-to-b from-purple-950/50 to-transparent mt-2" />
+              <div className="w-px h-12 bg-zinc-800 mt-2" />
             </div>
             <div className="flex-1">
               <h3 className="text-sm uppercase tracking-[0.3em] text-zinc-500 font-black mb-2">
                 Manifesto
               </h3>
-              <p className="font-alice text-zinc-300 text-2xl sm:text-3xl leading-relaxed">
+              <p className="font-alice text-zinc-300 text-xl sm:text-2xl leading-relaxed">
                 I craft and orchestrate highly performant web ecosystems,
                 forging resilient digital infrastructure designed to scale
                 seamlessly under heavy loads.
@@ -107,31 +108,31 @@ export default async function Home() {
           {/* Log 02: The Arcana */}
           <div className="flex gap-6 items-start group">
             <div className="flex flex-col items-center">
-              <span className="font-mono text-base tracking-widest text-purple-500/60 font-black">
+              <span className="font-mono text-base tracking-widest text-zinc-600 font-black">
                 02
               </span>
-              <div className="w-[1px] h-12 bg-linear-to-b from-purple-950/50 to-transparent mt-2" />
+              <div className="w-px h-12 bg-zinc-800 mt-2" />
             </div>
             <div className="flex-1">
               <h3 className="text-sm uppercase tracking-[0.3em] text-zinc-500 font-black mb-2">
                 The Elements
               </h3>
-              <p className="font-alice text-zinc-300 text-2xl sm:text-3xl leading-relaxed">
+              <p className="font-alice text-zinc-300 text-xl sm:text-2xl leading-relaxed">
                 My current architectural loadout is forged primarily through the
                 balance of{" "}
-                <span className="text-purple-400 font-sans font-semibold">
+                <span className="text-zinc-200 font-sans font-semibold">
                   TypeScript
                 </span>
                 ,{" "}
-                <span className="text-purple-400 font-sans font-semibold">
+                <span className="text-zinc-200 font-sans font-semibold">
                   Next.js
                 </span>
                 ,{" "}
-                <span className="text-purple-400 font-sans font-semibold">
+                <span className="text-zinc-200 font-sans font-semibold">
                   Node.js
                 </span>
                 , and{" "}
-                <span className="text-purple-400 font-sans font-semibold">
+                <span className="text-zinc-200 font-sans font-semibold">
                   MongoDB
                 </span>
                 {"."}
@@ -142,7 +143,7 @@ export default async function Home() {
           {/* Log 03: The Anchors */}
           <div className="flex gap-6 items-start group">
             <div className="flex flex-col items-center">
-              <span className="font-mono text-base tracking-widest text-purple-500/60 font-black">
+              <span className="font-mono text-base tracking-widest text-zinc-600 font-black">
                 03
               </span>
             </div>
@@ -150,7 +151,7 @@ export default async function Home() {
               <h3 className="text-sm uppercase tracking-[0.3em] text-zinc-500 font-black mb-2">
                 Realms Beyond
               </h3>
-              <p className="font-alice text-zinc-300 text-2xl sm:text-3xl leading-relaxed">
+              <p className="font-alice text-zinc-300 text-xl sm:text-2xl leading-relaxed">
                 When the terminal goes dark, I anchor my focus into physical
                 progression tracking at the gym, or defending tactical sectors
                 within competitive battlegrounds.
@@ -161,20 +162,28 @@ export default async function Home() {
 
         {/* ================= 4. TALISMAN ACTIONS (CTAs) ================= */}
         <div className="flex flex-col gap-4 text-lg tracking-widest sm:flex-row w-full justify-center max-w-md mt-12 relative z-20">
-          <ResumeButton />
 
-          <GothicButton label="SEND RAVEN" href="mailto:aabaa@gmail.com" />
+          <GothicButton
+            label="Resume"
+            icon={<FiFileText className="w-3.5 h-3.5" />}
+            href="/resume.pdf"
+          />
+          <GothicButton
+            label="Send Raven"
+            icon={<GiRaven className="w-4 h-4" />}
+            href="mailto:amank225566@gmail.com"
+          />
         </div>
 
-        {/* Music Section */}
-        <div className="w-full mt-16 pt-8 border-t border-purple-950/20 max-w-xl">
-          <div className="flex flex-col items-center gap-3 bg-[#07070a] border border-zinc-900 p-4 rounded-xl relative overflow-hidden group">
-            {/* Ambient inner pulsing bar indicator */}
-            <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
+        {/* ================= SKILLS ================= */}
+        <Skills />
 
+        {/* Music Section */}
+        <div className="w-full mt-16 pt-8 border-t border-zinc-800/60 max-w-xl">
+          <div className="flex flex-col items-center gap-3 bg-[#07070a] border border-zinc-900 p-4 rounded-xl relative overflow-hidden group">
             <div className="flex items-center gap-4 w-full">
-              {/* Album Artwork Seal */}
-              <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-purple-950 shrink-0 shadow-lg">
+              {/* Album Artwork */}
+              <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-zinc-800 shrink-0">
                 <Image
                   src="/dance-brothers.jpg"
                   alt="Album Cover"
@@ -186,16 +195,11 @@ export default async function Home() {
               {/* Track Content */}
               <div className="flex flex-col text-left flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-base tracking-[0.25em] uppercase text-purple-400 font-black">
-                    CURRENTLY SUMMONED
-                  </span>
-                  <span className="flex gap-[2px] h-3 items-end">
-                    <span className="w-[2px] bg-purple-500 rounded-full animate-[pulse_1s_infinite_alternate] h-2" />
-                    <span className="w-[2px] bg-purple-500 rounded-full animate-[pulse_0.7s_infinite_alternate_delay-100] h-3" />
-                    <span className="w-[2px] bg-purple-500 rounded-full animate-[pulse_0.9s_infinite_alternate_delay-200] h-1.5" />
+                  <span className="text-base tracking-[0.25em] uppercase text-zinc-500 font-black">
+                    CURRENTLY PLAYING
                   </span>
                 </div>
-                <span className="text-2xl font-bold text-zinc-100 truncate mt-0.5">
+                <span className="text-2xl font-bold text-zinc-200 truncate mt-0.5">
                   Low Man's Lyric
                 </span>
                 <span className="text-lg text-zinc-500 truncate">
@@ -208,28 +212,34 @@ export default async function Home() {
 
         {/* Separator */}
         <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
-          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-purple-900/50" />
-          <div className="h-[1px] w-16 bg-gradient-to-r from-purple-900/50 to-purple-500" />
-          <span className="text-2xl tracking-widest text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
-            ❖ ✧ ☠ ✧ ❖
-          </span>
-          <div className="h-[1px] w-16 bg-gradient-to-l from-purple-900/50 to-purple-500" />
-          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-purple-900/50" />
+          <div className="h-px flex-1 bg-zinc-800" />
+          <span className="text-lg tracking-widest text-zinc-600">❖</span>
+          <div className="h-px flex-1 bg-zinc-800" />
         </div>
 
-        {/* ================= 5. CHRONICLES OF MASTERY (EXPERIENCE) ================= */}
+        {/* ================= 5. WORK EXPERIENCE ================= */}
         <div id="chronicles" className="w-full text-left max-w-xl scroll-mt-28">
-          <span className="block text-center text-base tracking-[0.4em] text-purple-500/70 uppercase font-black mb-2">
-            Past Campaigns
+          <span className="block text-center text-base tracking-[0.4em] text-zinc-500 uppercase font-black mb-2">
+            Work Experience
           </span>
           <h2
-            className="font-heading text-4xl font-black tracking-wide text-center mb-10
+            className="font-heading text-4xl font-black tracking-wide text-center mb-4
                          text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500"
           >
-            Chronicles of Mastery
+            Experience
           </h2>
 
-          <div className="flex flex-col gap-10 relative border-l border-purple-950/40 ml-4 pl-6">
+          <div className="flex justify-center mb-10">
+            <Link
+              href="/experience"
+              className="group inline-flex items-center gap-2 text-base tracking-[0.15em] uppercase font-bold text-zinc-400 transition-colors hover:text-white"
+            >
+              View Full Work History
+              <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+
+          <div className="flex flex-col gap-10 relative border-l border-zinc-800 ml-4 pl-6">
             {experiences.slice(0, 2).map((entry) => (
               <div key={entry.id} className="relative">
                 {/* Timeline Node */}
@@ -239,11 +249,7 @@ export default async function Home() {
                     alt="Timeline lantern"
                     width={28}
                     height={40}
-                    className={
-                      entry.current
-                        ? "drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] object-contain"
-                        : "object-contain opacity-60"
-                    }
+                    className={entry.current ? "object-contain" : "object-contain opacity-50"}
                   />
                 </div>
 
@@ -254,7 +260,7 @@ export default async function Home() {
                   <span
                     className={
                       entry.current
-                        ? "text-base tracking-wider uppercase font-sans text-purple-400/80 bg-purple-950/30 px-2 py-0.5 border border-purple-900/30 rounded"
+                        ? "text-base tracking-wider uppercase font-sans text-zinc-300 bg-zinc-800/60 px-2 py-0.5 border border-zinc-700 rounded"
                         : "text-base tracking-wider uppercase font-sans text-zinc-500 bg-zinc-900/50 px-2 py-0.5 border border-zinc-800/60 rounded"
                     }
                   >
@@ -264,7 +270,7 @@ export default async function Home() {
                 <h4 className="font-heading text-lg tracking-widest text-zinc-400 font-bold uppercase mt-1">
                   {entry.company}
                 </h4>
-                <p className="text-zinc-400 text-2xl sm:text-3xl leading-relaxed mt-3">
+                <p className="text-zinc-400 text-xl sm:text-2xl leading-relaxed mt-3">
                   {entry.summary}
                 </p>
 
@@ -273,7 +279,7 @@ export default async function Home() {
                     <span
                       key={tech.name}
                       title={tech.name}
-                      className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-purple-950/40 text-purple-400/80"
+                      className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400"
                     >
                       <tech.icon className="w-5 h-5" />
                     </span>
@@ -283,45 +289,49 @@ export default async function Home() {
             ))}
           </div>
 
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/experience"
-              className="group inline-flex items-center gap-2 text-base tracking-[0.15em] uppercase font-bold text-purple-400/80 transition-colors hover:text-purple-300 hover:drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]"
-            >
-              View the Full Chronicles
-              <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
         </div>
         {/* Separator */}
         <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
-          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-purple-900/50" />
-          <div className="h-[1px] w-16 bg-gradient-to-r from-purple-900/50 to-purple-500" />
-          <span className="text-2xl tracking-widest text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
-            ❖ ✧ ☠ ✧ ❖
-          </span>
-          <div className="h-[1px] w-16 bg-gradient-to-l from-purple-900/50 to-purple-500" />
-          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-purple-900/50" />
+          <div className="h-px flex-1 bg-zinc-800" />
+          <span className="text-lg tracking-widest text-zinc-600">❖</span>
+          <div className="h-px flex-1 bg-zinc-800" />
         </div>
         {/* ================= 6. RELICS OF CREATION (PROJECTS) ================= */}
         <RelicsSection projects={projects} />
 
         {/* Separator */}
         <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
-          <div className="h-[1px] flex-1 bg-gradient-to-r from-transparent to-purple-900/50" />
-          <div className="h-[1px] w-16 bg-gradient-to-r from-purple-900/50 to-purple-500" />
-          <span className="text-2xl tracking-widest text-purple-500 drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]">
-            ❖ ✧ ☠ ✧ ❖
-          </span>
-          <div className="h-[1px] w-16 bg-gradient-to-l from-purple-900/50 to-purple-500" />
-          <div className="h-[1px] flex-1 bg-gradient-to-l from-transparent to-purple-900/50" />
+          <div className="h-px flex-1 bg-zinc-800" />
+          <span className="text-lg tracking-widest text-zinc-600">❖</span>
+          <div className="h-px flex-1 bg-zinc-800" />
         </div>
+
+        {/* ================= TESTIMONIALS ================= */}
+        <Testimonials />
+
+        {/* Separator */}
+        <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
+          <div className="h-px flex-1 bg-zinc-800" />
+          <span className="text-lg tracking-widest text-zinc-600">❖</span>
+          <div className="h-px flex-1 bg-zinc-800" />
+        </div>
+
+        {/* ================= CONTACT ================= */}
+        <Contact />
+
+        {/* Separator */}
+        <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
+          <div className="h-px flex-1 bg-zinc-800" />
+          <span className="text-lg tracking-widest text-zinc-600">❖</span>
+          <div className="h-px flex-1 bg-zinc-800" />
+        </div>
+
         {/* ================= 7. RECORDS OF THE REALM (GITHUB + VALORANT) ================= */}
         <div
           id="records"
-          className="w-full text-left max-w-xl mt-16 pt-8 border-t border-purple-950/20 scroll-mt-28"
+          className="w-full text-left max-w-xl mt-16 pt-8 border-t border-zinc-800/60 scroll-mt-28"
         >
-          <span className="block text-center text-base tracking-[0.4em] text-purple-500/70 uppercase font-black mb-2">
+          <span className="block text-center text-base tracking-[0.4em] text-zinc-500 uppercase font-black mb-2">
             Living Archives
           </span>
           <h2 className="font-heading text-4xl font-black tracking-wide text-center mb-10 text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500">

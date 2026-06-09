@@ -28,6 +28,8 @@ export const projects: ProjectEntry[] = [
       "Built on a Next.js front end backed by a MERN-stack API layer.",
     ],
     image: "/avmg.png",
+    liveUrl: "https://avmg.vercel.app",
+    repoUrl: "https://github.com/Valtryek/avmg",
     technologies: [
       technologies.nextjs,
       technologies.react,
@@ -52,6 +54,8 @@ export const projects: ProjectEntry[] = [
       "Built a real-time notification system to keep teams in sync as work happens.",
     ],
     image: "/projectteams.png",
+    liveUrl: "https://projectteams.vercel.app",
+    repoUrl: "https://github.com/Valtryek/projectteams",
     technologies: [
       technologies.socketio,
       technologies.react,
@@ -73,6 +77,8 @@ export const projects: ProjectEntry[] = [
       "Designed detail views covering cast, ratings, synopsis, and related recommendations.",
     ],
     image: "/WatchThis.png",
+    liveUrl: "https://watchthis.vercel.app",
+    repoUrl: "https://github.com/Valtryek/watchthis",
     technologies: [technologies.react, technologies.firebase, technologies.tmdb],
   },
   {
@@ -87,6 +93,8 @@ export const projects: ProjectEntry[] = [
       "Shipped the project end-to-end as a freelance engagement, from requirements to deployment.",
     ],
     image: "/SolarVistar.png",
+    liveUrl: "https://solarvistar.vercel.app",
+    repoUrl: "https://github.com/Valtryek/solarvistar",
     technologies: [
       technologies.rtkquery,
       technologies.react,
@@ -110,6 +118,8 @@ export const projects: ProjectEntry[] = [
       "Handled produce imagery and media uploads through Cloudinary.",
     ],
     image: "/kropigo.png",
+    liveUrl: "https://kropigo.vercel.app",
+    repoUrl: "https://github.com/Valtryek/kropigo",
     technologies: [
       technologies.socketio,
       technologies.rtkquery,

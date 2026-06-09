@@ -5,9 +5,9 @@ import { experiences } from "@/lib/data/experience";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 export const metadata = {
-  title: "Chronicles of Mastery — Aman Ahmad",
+  title: "Work Experience — Aman Ahmad",
   description:
-    "The unabridged record of campaigns served — every role, every realm, every battle waged across the stack.",
+    "Full work history — every role, every company, every project shipped across the stack.",
 };
 
 export default function ExperiencePage() {
@@ -16,28 +16,28 @@ export default function ExperiencePage() {
       <div className="w-full text-left max-w-xl">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase text-purple-400/70 transition-colors hover:text-purple-300 hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]"
+          className="inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase text-zinc-500 transition-colors hover:text-zinc-200"
         >
           <FiArrowLeft className="w-4 h-4" />
-          Return to the Sanctum
+          Back to Home
         </Link>
 
         <div className="mt-10 mb-14">
-          <span className="block text-center text-base tracking-[0.4em] text-purple-500/70 uppercase font-black mb-2">
-            The Unabridged Saga
+          <span className="block text-center text-base tracking-[0.4em] text-zinc-500 uppercase font-black mb-2">
+            Work History
           </span>
           <h1
             className="font-heading text-4xl sm:text-5xl font-black tracking-wide text-center mb-6
                          text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500"
           >
-            Chronicles of Mastery
+            Work Experience
           </h1>
           <p className="font-alice text-zinc-400 text-2xl sm:text-3xl leading-relaxed text-center italic max-w-md mx-auto">
-            Every campaign fought, every realm served — the full record of battles waged across the stack, set down in detail for those who seek the whole tale.
+            Every role and company — the full record of work shipped across the stack.
           </p>
         </div>
 
-        <div className="flex flex-col gap-16 relative border-l border-purple-950/40 ml-4 pl-6">
+        <div className="flex flex-col gap-16 relative border-l border-zinc-800 ml-4 pl-6">
           {experiences.map((entry, index) => (
             <div key={entry.id} className="relative">
               {/* Timeline Node */}
@@ -47,16 +47,12 @@ export default function ExperiencePage() {
                   alt="Timeline lantern"
                   width={28}
                   height={40}
-                  className={
-                    entry.current
-                      ? "drop-shadow-[0_0_8px_rgba(168,85,247,0.8)] object-contain"
-                      : "object-contain opacity-60"
-                  }
+                  className={entry.current ? "object-contain" : "object-contain opacity-50"}
                 />
               </div>
 
-              <span className="text-purple-500/60 text-sm tracking-[0.35em] uppercase font-bold">
-                Campaign {String(index + 1).padStart(2, "0")}
+              <span className="text-zinc-600 text-sm tracking-[0.35em] uppercase font-bold">
+                Role {String(index + 1).padStart(2, "0")}
               </span>
 
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mt-1">
@@ -66,7 +62,7 @@ export default function ExperiencePage() {
                 <span
                   className={
                     entry.current
-                      ? "text-base tracking-wider uppercase font-sans text-purple-400/80 bg-purple-950/30 px-2 py-0.5 border border-purple-900/30 rounded shrink-0"
+                      ? "text-base tracking-wider uppercase font-sans text-zinc-300 bg-zinc-800/60 px-2 py-0.5 border border-zinc-700 rounded shrink-0"
                       : "text-base tracking-wider uppercase font-sans text-zinc-500 bg-zinc-900/50 px-2 py-0.5 border border-zinc-800/60 rounded shrink-0"
                   }
                 >
@@ -82,16 +78,16 @@ export default function ExperiencePage() {
                   ✦ {entry.location}
                 </span>
                 {entry.current && (
-                  <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-purple-400 drop-shadow-[0_0_6px_rgba(168,85,247,0.6)]">
-                    ◆ Currently serving
+                  <span className="text-[11px] tracking-[0.2em] uppercase font-bold text-zinc-300">
+                    ◆ Current Role
                   </span>
                 )}
               </div>
 
               <ul className="flex flex-col gap-3 mt-5">
                 {entry.highlights.map((point, i) => (
-                  <li key={i} className="flex gap-3 text-zinc-400 text-2xl sm:text-3xl leading-relaxed">
-                    <span className="mt-2 text-purple-500/70 text-xs shrink-0 drop-shadow-[0_0_6px_rgba(168,85,247,0.7)]">
+                  <li key={i} className="flex gap-3 text-zinc-400 text-xl sm:text-2xl leading-relaxed">
+                    <span className="mt-2 text-zinc-600 text-xs shrink-0">
                       ✧
                     </span>
                     <span>{point}</span>
@@ -104,7 +100,7 @@ export default function ExperiencePage() {
                   <span
                     key={tech.name}
                     title={tech.name}
-                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-purple-950/40 text-purple-400/80"
+                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400"
                   >
                     <tech.icon className="w-5 h-5" />
                   </span>
@@ -114,16 +110,14 @@ export default function ExperiencePage() {
           ))}
         </div>
 
-        <div className="mt-20 pt-10 border-t border-purple-950/20 flex flex-col items-center gap-4 text-center">
-          <span className="text-zinc-600 text-sm tracking-[0.3em] uppercase">The tale continues</span>
+        <div className="mt-20 pt-10 border-t border-zinc-800/60 flex flex-col items-center gap-4 text-center">
+          <span className="text-zinc-600 text-sm tracking-[0.3em] uppercase">Also browse</span>
           <Link
             href="/projects"
-            className="group inline-flex items-center gap-2 font-heading text-xl sm:text-2xl font-black tracking-wide
-                       text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500
-                       transition-all hover:drop-shadow-[0_0_14px_rgba(168,85,247,0.5)]"
+            className="group inline-flex items-center gap-2 font-heading text-xl sm:text-2xl font-black tracking-wide text-zinc-300 transition-colors hover:text-white"
           >
-            Explore the Relics of Creation
-            <FiArrowRight className="w-5 h-5 text-purple-400 transition-transform group-hover:translate-x-1" />
+            View Projects
+            <FiArrowRight className="w-5 h-5 text-zinc-400 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
