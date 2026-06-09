@@ -1,26 +1,53 @@
 import Image from "next/image";
+import type { ContributionsData } from "@/lib/data/github";
+import type { ValorantStats } from "@/lib/data/valorant";
 
-export default function ArcaneWidgets({ contributions, valorant }: any) {
+export default function ArcaneWidgets({
+  contributions,
+  valorant,
+}: {
+  contributions: ContributionsData | null;
+  valorant: ValorantStats | null;
+}) {
   return (
     <div className="flex flex-col gap-14 w-full max-w-xl text-left mt-12">
-      {/* ================= Widget A — Contribution Heatmap ================= */}
-      <div className="flex flex-col relative group">
+
+      {/* ── GitHub Contributions ── */}
+      <div className="flex flex-col">
         <h3 className="font-heading text-2xl font-black tracking-widest text-zinc-100 mb-1 flex items-center gap-3 uppercase">
           <span className="text-zinc-600 text-lg">✧</span>
-          The Tome of Contributions
+          GitHub Activity
         </h3>
-        <p className="font-alice text-zinc-400 text-xl sm:text-2xl leading-relaxed mb-6 italic">
-          A year of arcane labor, etched into the living parchment of{" "}
-          <span className="text-zinc-200 font-sans font-semibold border-b border-zinc-700">@{contributions?.username ?? "Valtryek"}</span>.
-        </p>
 
         {contributions ? (
-          <div className="relative rounded-xl bg-[#08080b] border border-zinc-800/80 overflow-hidden">
-            <div className="relative p-6 overflow-x-auto">
+          <div className="rounded-xl bg-[#08080b] border border-zinc-800/80 overflow-hidden">
+
+            {/* Summary row */}
+            <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-zinc-800/60">
+              <div>
+                <span className="font-heading text-3xl font-black text-zinc-100">
+                  {contributions.totalLastYear.toLocaleString()}
+                </span>
+                <span className="text-xs text-zinc-500 ml-2 tracking-[0.2em] uppercase font-bold">
+                  contributions
+                </span>
+              </div>
+              <a
+                href={`https://github.com/${contributions.username}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs tracking-[0.2em] uppercase font-bold text-zinc-600 hover:text-zinc-300 transition-colors"
+              >
+                @{contributions.username}
+              </a>
+            </div>
+
+            {/* Heatmap */}
+            <div className="p-6 overflow-x-auto">
               <div className="flex gap-[4px] w-max">
-                {contributions.weeks.map((week: any, weekIndex: number) => (
+                {contributions.weeks.map((week, weekIndex) => (
                   <div key={weekIndex} className="flex flex-col gap-[4px]">
-                    {week.map((day: any, dayIndex: number) => {
+                    {week.map((day, dayIndex) => {
                       const levelClasses: Record<number, string> = {
                         0: "bg-zinc-900/40 border-zinc-800/50",
                         1: "bg-zinc-700/50 border-zinc-700/60",
@@ -31,7 +58,7 @@ export default function ArcaneWidgets({ contributions, valorant }: any) {
                       return (
                         <span
                           key={dayIndex}
-                          title={day.date ? `${day.count} incantations cast on ${day.date}` : undefined}
+                          title={day.date ? `${day.count} contribution${day.count !== 1 ? "s" : ""} on ${day.date}` : undefined}
                           className={`w-[11px] h-[11px] rounded-[3px] border transition-colors duration-200 hover:bg-white hover:border-white cursor-default ${levelClasses[day.level]}`}
                         />
                       );
@@ -40,79 +67,86 @@ export default function ArcaneWidgets({ contributions, valorant }: any) {
                 ))}
               </div>
 
-              {/* Heatmap Legend */}
-              <div className="flex items-center justify-end gap-3 mt-6 text-zinc-500 font-mono text-[11px] tracking-[0.2em]">
-                <span className="text-zinc-600">DORMANT</span>
+              {/* Legend */}
+              <div className="flex items-center justify-end gap-2 mt-5 text-zinc-600 font-mono text-[10px] tracking-[0.15em] uppercase">
+                <span>Less</span>
                 <span className="w-[10px] h-[10px] rounded-[2px] border bg-zinc-900/40 border-zinc-800/50" />
                 <span className="w-[10px] h-[10px] rounded-[2px] border bg-zinc-700/50 border-zinc-700/60" />
                 <span className="w-[10px] h-[10px] rounded-[2px] border bg-zinc-600/60 border-zinc-500/50" />
                 <span className="w-[10px] h-[10px] rounded-[2px] border bg-zinc-400/70 border-zinc-300/50" />
                 <span className="w-[10px] h-[10px] rounded-[2px] border bg-zinc-200 border-white/40" />
-                <span className="text-zinc-400">AWAKENED</span>
+                <span>More</span>
               </div>
             </div>
           </div>
         ) : (
           <div className="rounded-xl border border-dashed border-zinc-800 bg-zinc-950/50 px-6 py-12 text-center text-zinc-600 text-lg font-alice tracking-widest uppercase">
-            The tome remains sealed.
+            GitHub data unavailable.
           </div>
         )}
       </div>
 
-      {/* ================= Widget B — Valorant Stats ================= */}
-      <div className="flex flex-col relative group mt-4">
+      {/* ── Valorant ── */}
+      <div className="flex flex-col">
         <h3 className="font-heading text-2xl font-black tracking-widest text-zinc-100 mb-1 flex items-center gap-3 uppercase">
           <span className="text-zinc-600 text-lg">⚔</span>
-          The Vanguard's Sigil
+          Valorant
         </h3>
-        <p className="font-alice text-zinc-400 text-xl sm:text-2xl leading-relaxed mb-6 italic">
-          Tactical skirmishes fought and realms defended under the banner of Valorant.
-        </p>
 
         {valorant ? (
-          <div className="relative rounded-xl bg-[#08080b] border border-zinc-800/80 overflow-hidden">
-            <div className="relative p-7 flex items-center gap-8">
-              {/* Rank Sigil */}
+          <div className="rounded-xl bg-[#08080b] border border-zinc-800/80 overflow-hidden">
+            <div className="p-6 flex gap-6 items-center">
+
+              {/* Rank icon */}
               {valorant.rankIconUrl && (
                 <div className="relative w-20 h-20 shrink-0">
-                  <Image src={valorant.rankIconUrl} alt={valorant.currentTier} fill className="object-contain" />
+                  <Image
+                    src={valorant.rankIconUrl}
+                    alt={valorant.currentTier}
+                    fill
+                    className="object-contain"
+                  />
                 </div>
               )}
 
-              {/* Character Sheet Stats */}
+              {/* Right side */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-baseline gap-3 flex-wrap">
-                  <span className="font-heading text-2xl font-black tracking-wider text-zinc-100 truncate">
+                {/* Name + tag */}
+                <div className="flex items-baseline gap-2 flex-wrap">
+                  <span className="font-heading text-2xl font-black tracking-wide text-zinc-100">
                     {valorant.riotName}
                   </span>
-                  <span className="text-zinc-500 font-mono font-medium text-sm">
-                    &lt;#{valorant.riotTag}&gt;
+                  <span className="text-zinc-500 font-mono text-sm">
+                    #{valorant.riotTag}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-3 mt-1">
-                  <p className="text-zinc-300 font-mono text-sm tracking-[0.25em] uppercase font-bold">
+                {/* Rank + level */}
+                <div className="flex items-center gap-2 mt-1 flex-wrap">
+                  <span className="text-zinc-200 font-mono text-sm tracking-[0.2em] uppercase font-bold">
                     {valorant.currentTier}
-                  </p>
-                  <span className="text-[10px] font-black tracking-[0.2em] uppercase px-2 py-0.5 rounded bg-zinc-900/80 border border-zinc-700 text-zinc-400">
-                    SOUL LVL {valorant.accountLevel}
+                  </span>
+                  <span className="text-[10px] font-black tracking-[0.15em] uppercase px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 text-zinc-400">
+                    Level {valorant.accountLevel}
                   </span>
                 </div>
 
-                <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 text-zinc-500 font-mono text-xs border-t border-zinc-800 pt-4 bg-zinc-950/30 -mx-2 px-2 rounded-lg">
-                  <div className="flex flex-col">
-                    <span className="text-[9px] text-zinc-600 tracking-widest mb-0.5">BATTLE RATING</span>
-                    <span className="text-zinc-200 font-sans font-bold text-sm">{valorant.rr} <span className="text-zinc-500 text-[10px]">RR</span></span>
+                {/* Stats grid */}
+                <div className="grid grid-cols-3 gap-4 mt-4 pt-4 border-t border-zinc-800">
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] text-zinc-600 tracking-[0.2em] uppercase font-bold">Rank RR</span>
+                    <span className="text-zinc-200 font-bold text-sm">
+                      {valorant.rr} <span className="text-zinc-500 text-[10px]">RR</span>
+                    </span>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-[9px] text-zinc-600 tracking-widest mb-0.5">HIDDEN POWER</span>
-                    <span className="text-zinc-200 font-sans font-bold text-sm">{valorant.elo} <span className="text-zinc-500 text-[10px]">ELO</span></span>
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] text-zinc-600 tracking-[0.2em] uppercase font-bold">ELO</span>
+                    <span className="text-zinc-200 font-bold text-sm">{valorant.elo}</span>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-[9px] text-zinc-600 tracking-widest mb-0.5">LAST SKIRMISH</span>
-                    <span className={`font-sans font-black text-sm flex items-center gap-1 ${valorant.mmrChange >= 0 ? "text-emerald-400" : "text-rose-500"}`}>
-                      {valorant.mmrChange >= 0 ? "▲ +" : "▼ "}
-                      {valorant.mmrChange}
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] text-zinc-600 tracking-[0.2em] uppercase font-bold">Last Game</span>
+                    <span className={`font-bold text-sm ${valorant.mmrChange >= 0 ? "text-emerald-400" : "text-rose-500"}`}>
+                      {valorant.mmrChange >= 0 ? `+${valorant.mmrChange}` : valorant.mmrChange} RR
                     </span>
                   </div>
                 </div>
@@ -121,7 +155,7 @@ export default function ArcaneWidgets({ contributions, valorant }: any) {
           </div>
         ) : (
           <div className="rounded-xl border border-dashed border-zinc-800 bg-zinc-950/50 px-6 py-12 text-center text-zinc-600 text-lg font-alice tracking-widest uppercase">
-            The sigil remains unattuned.
+            Valorant data unavailable.
           </div>
         )}
       </div>

@@ -7,6 +7,7 @@ import { experiences } from "@/lib/data/experience";
 import { projects } from "@/lib/data/projects";
 import { getGithubContributions } from "@/lib/data/github";
 import { getValorantStats } from "@/lib/data/valorant";
+import { getNowPlaying } from "@/lib/data/lastfm";
 import { FiArrowRight, FiFileText } from "react-icons/fi";
 import { GiRaven } from "react-icons/gi";
 import ArcaneWidgets from "@/components/ArcaneWidget";
@@ -15,11 +16,13 @@ import RelicsSection from "@/components/Projects";
 import Skills from "@/components/Skills";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import NowPlayingWidget from "@/components/NowPlayingWidget";
 
 export default async function Home() {
-  const [contributions, valorant] = await Promise.all([
+  const [contributions, valorant, nowPlaying] = await Promise.all([
     getGithubContributions(),
     getValorantStats(),
+    getNowPlaying(),
   ]);
 
   return (
@@ -179,36 +182,7 @@ export default async function Home() {
         <Skills />
 
         {/* Music Section */}
-        <div className="w-full mt-16 pt-8 border-t border-zinc-800/60 max-w-xl">
-          <div className="flex flex-col items-center gap-3 bg-[#07070a] border border-zinc-900 p-4 rounded-xl relative overflow-hidden group">
-            <div className="flex items-center gap-4 w-full">
-              {/* Album Artwork */}
-              <div className="relative w-14 h-14 rounded-lg overflow-hidden border border-zinc-800 shrink-0">
-                <Image
-                  src="/dance-brothers.jpg"
-                  alt="Album Cover"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Track Content */}
-              <div className="flex flex-col text-left flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <span className="text-base tracking-[0.25em] uppercase text-zinc-500 font-black">
-                    CURRENTLY PLAYING
-                  </span>
-                </div>
-                <span className="text-2xl font-bold text-zinc-200 truncate mt-0.5">
-                  Low Man's Lyric
-                </span>
-                <span className="text-lg text-zinc-500 truncate">
-                  Universal Production Music
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <NowPlayingWidget initial={nowPlaying} />
 
         {/* Separator */}
         <div className="w-full flex items-center justify-center gap-4 my-16 select-none pointer-events-none relative z-20">
