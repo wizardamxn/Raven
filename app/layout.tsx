@@ -4,6 +4,7 @@ import { Alex_Brush } from "next/font/google";
 import { ReactLenis } from "lenis/react";
 import MagicCursor from "@/components/MagicCursor";
 import MagicNavButton from "@/components/MagicNavButton";
+import MysticalDecor from "@/components/MysticalDecor";
 import "lenis/dist/lenis.css";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({
       className={`${alice.variable} ${heading.variable} ${script.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <MysticalDecor />
         <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
           <MagicCursor />
           <MagicNavButton />

@@ -12,6 +12,12 @@ export type ProjectEntry = {
   image: string;
   liveUrl?: string;
   repoUrl?: string;
+  /** Use when a project ships as multiple repos (e.g. separate backend/frontend) instead of one */
+  repoUrls?: { label: string; url: string }[];
+  /** Live demo exists but access is restricted (e.g. client-owned, no public link) */
+  livePrivate?: boolean;
+  /** Repo exists but access is restricted (e.g. private, under client agreement) */
+  repoPrivate?: boolean;
   technologies: Technology[];
 };
 
@@ -26,10 +32,14 @@ export const projects: ProjectEntry[] = [
       "Handled large file uploads with Multer and persisted assets via Supabase storage and PostgreSQL.",
       "Shipped an AI notes generator that summarizes YouTube videos straight from their transcripts.",
       "Built on a Next.js front end backed by a MERN-stack API layer.",
+      "Deployed and operated the backend on an AWS EC2 instance, handling production traffic end to end.",
     ],
     image: "/avmg.png",
-    liveUrl: "https://avmg.vercel.app",
-    repoUrl: "https://github.com/Valtryek/avmg",
+    liveUrl: "https://avmg.amanahmad.xyz",
+    repoUrls: [
+      { label: "Backend", url: "https://github.com/wizardamxn/avmg-b" },
+      { label: "Frontend", url: "https://github.com/wizardamxn/avmg-f" },
+    ],
     technologies: [
       technologies.nextjs,
       technologies.react,
@@ -40,29 +50,34 @@ export const projects: ProjectEntry[] = [
       technologies.ffmpeg,
       technologies.supabase,
       technologies.postgresql,
+      technologies.aws,
     ],
   },
   {
     id: "projectteams",
     title: "ProjectTeams",
     description:
-      "A team collaboration platform where teams share documents, chat in real time, and lean on built-in AI to fix grammar and auto-generate tags for shared content.",
+      "A real-time team collaboration platform with chat, presence, and co-editing — plus a built-in RAG engine that lets teams upload their own documents and ask questions answered from their own content, with cited sources.",
     highlights: [
-      "Powered live chat and presence with Socket.io across a MERN stack.",
-      "Integrated the Vercel AI SDK for in-app grammar correction and automatic tag generation.",
-      "Designed document sharing and collaboration flows backed by MongoDB.",
-      "Built a real-time notification system to keep teams in sync as work happens.",
+      "Shipped a retrieval-augmented (RAG) document Q&A engine — teams upload PDFs and ask questions answered strictly from their own corpus, with cited sources.",
+      "Offloaded heavy ingestion (parse, chunk, embed) to a BullMQ/Redis worker, with semantic retrieval via MongoDB Atlas Vector Search scoped per team.",
+      "Powered live chat and presence with Socket.io across a MERN stack, hitting sub-100ms message delivery.",
+      "Added an AI authoring suite — summaries, auto-tagging, and grammar refinement — on the Vercel AI SDK and Gemini.",
+      "Deployed to production on AWS EC2 with PM2 (API + worker) behind an Nginx same-origin reverse proxy, fronted by Cloudflare and Let's Encrypt TLS.",
     ],
     image: "/projectteams.png",
-    liveUrl: "https://projectteams.vercel.app",
-    repoUrl: "https://github.com/Valtryek/projectteams",
+    liveUrl: "https://projectteams.amanahmad.xyz",
+    repoUrl: "https://github.com/wizardamxn/projectteams",
     technologies: [
       technologies.socketio,
       technologies.react,
       technologies.nodejs,
       technologies.express,
       technologies.mongodb,
+      technologies.redis,
+      technologies.supabase,
       technologies.vercelai,
+      technologies.aws,
     ],
   },
   {
@@ -77,8 +92,8 @@ export const projects: ProjectEntry[] = [
       "Designed detail views covering cast, ratings, synopsis, and related recommendations.",
     ],
     image: "/WatchThis.png",
-    liveUrl: "https://watchthis.vercel.app",
-    repoUrl: "https://github.com/Valtryek/watchthis",
+    liveUrl: "https://watchthis.amanahmad.xyz",
+    repoUrl: "https://github.com/wizardamxn/watchthis",
     technologies: [technologies.react, technologies.firebase, technologies.tmdb],
   },
   {
@@ -93,8 +108,10 @@ export const projects: ProjectEntry[] = [
       "Shipped the project end-to-end as a freelance engagement, from requirements to deployment.",
     ],
     image: "/SolarVistar.png",
-    liveUrl: "https://solarvistar.vercel.app",
-    repoUrl: "https://github.com/Valtryek/solarvistar",
+    liveUrl: "https://solarvistar.amanahmad.xyz",
+    repoUrl: "https://github.com/wizardamxn/solarvistar",
+    livePrivate: true,
+    repoPrivate: true,
     technologies: [
       technologies.rtkquery,
       technologies.react,
@@ -118,8 +135,8 @@ export const projects: ProjectEntry[] = [
       "Handled produce imagery and media uploads through Cloudinary.",
     ],
     image: "/kropigo.png",
-    liveUrl: "https://kropigo.vercel.app",
-    repoUrl: "https://github.com/Valtryek/kropigo",
+    liveUrl: "https://kropigo.in",
+    repoUrl: "https://github.com/wizardamxn/kropigo",
     technologies: [
       technologies.socketio,
       technologies.rtkquery,

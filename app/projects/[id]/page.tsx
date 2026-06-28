@@ -6,7 +6,8 @@ import remarkGfm from "remark-gfm";
 import PageShell from "@/components/PageShell";
 import { projects } from "@/lib/data/projects";
 import { getCaseStudy, hasCaseStudy } from "@/lib/data/caseStudies";
-import { FiArrowLeft, FiExternalLink, FiGithub } from "react-icons/fi";
+import ProjectLinks from "@/components/ProjectLinks";
+import { FiArrowLeft } from "react-icons/fi";
 
 export function generateStaticParams() {
   return projects
@@ -162,30 +163,9 @@ export default async function CaseStudyPage({
             {project.description}
           </p>
 
-          {(project.liveUrl || project.repoUrl) && (
-            <div className="flex justify-center gap-3 mt-6">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="View live demo"
-                  className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors hover:text-zinc-200 hover:border-zinc-700"
-                >
-                  <FiExternalLink className="w-4 h-4" />
-                </a>
-              )}
-              {project.repoUrl && (
-                <a
-                  href={project.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="View source code"
-                  className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors hover:text-zinc-200 hover:border-zinc-700"
-                >
-                  <FiGithub className="w-4 h-4" />
-                </a>
-              )}
+          {(project.liveUrl || project.repoUrl || project.repoUrls?.length) && (
+            <div className="flex justify-center mt-6">
+              <ProjectLinks project={project} size="md" />
             </div>
           )}
         </div>

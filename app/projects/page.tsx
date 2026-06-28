@@ -3,12 +3,8 @@ import Image from "next/image";
 import PageShell from "@/components/PageShell";
 import { projects } from "@/lib/data/projects";
 import { hasCaseStudy } from "@/lib/data/caseStudies";
-import {
-  FiArrowLeft,
-  FiArrowRight,
-  FiExternalLink,
-  FiGithub,
-} from "react-icons/fi";
+import ProjectLinks from "@/components/ProjectLinks";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 export const metadata = {
   title: "Relics of Creation — Aman Ahmad",
@@ -82,30 +78,9 @@ export default function ProjectsPage() {
                 </h2>
               )}
 
-              {(project.liveUrl || project.repoUrl) && (
-                <div className="flex gap-3 mt-3">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="View live demo"
-                      className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors hover:text-zinc-200 hover:border-zinc-700"
-                    >
-                      <FiExternalLink className="w-4 h-4" />
-                    </a>
-                  )}
-                  {project.repoUrl && (
-                    <a
-                      href={project.repoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      title="View source code"
-                      className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors hover:text-zinc-200 hover:border-zinc-700"
-                    >
-                      <FiGithub className="w-4 h-4" />
-                    </a>
-                  )}
+              {(project.liveUrl || project.repoUrl || project.repoUrls?.length) && (
+                <div className="mt-3">
+                  <ProjectLinks project={project} size="sm" />
                 </div>
               )}
 

@@ -16,11 +16,24 @@ export default function MagicCursor() {
     const ring = { x: mouse.x, y: mouse.y };
     let frame = 0;
 
+    let lastSpark = 0;
+
     const onMove = (e: MouseEvent) => {
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mouse.x}px, ${mouse.y}px, 0) translate(-50%, -50%)`;
+      }
+      const now = performance.now();
+      if (now - lastSpark > 90) {
+        lastSpark = now;
+        const s = document.createElement("div");
+        s.className = "cursor-spark";
+        s.style.left = `${e.clientX}px`;
+        s.style.top = `${e.clientY}px`;
+        s.style.setProperty("--dx", `${Math.random() * 20 - 10}px`);
+        document.body.appendChild(s);
+        s.addEventListener("animationend", () => s.remove());
       }
     };
 

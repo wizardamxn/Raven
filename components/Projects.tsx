@@ -1,25 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FiExternalLink, FiGithub, FiArrowRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import { hasCaseStudy } from "@/lib/data/caseStudies";
+import ProjectLinks from "@/components/ProjectLinks";
+import type { ProjectEntry } from "@/lib/data/projects";
 
-// Assuming your projects data structure looks something like this:
-interface Tech {
-  name: string;
-  icon: React.ComponentType<{ className?: string }>;
-}
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  technologies: Tech[];
-  liveUrl?: string;
-  repoUrl?: string;
-}
-
-export default function RelicsSection({ projects }: { projects: Project[] }) {
+export default function RelicsSection({ projects }: { projects: ProjectEntry[] }) {
   return (
     <div
       id="relics"
@@ -98,28 +84,9 @@ export default function RelicsSection({ projects }: { projects: Project[] }) {
             </div>
 
             {/* Project Links */}
-            {(project.liveUrl || project.repoUrl) && (
-              <div className="flex gap-3 mt-4">
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors hover:text-zinc-200 hover:border-zinc-700"
-                  >
-                    <FiExternalLink className="w-4 h-4" />
-                  </a>
-                )}
-                {project.repoUrl && (
-                  <a
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors hover:text-zinc-200 hover:border-zinc-700"
-                  >
-                    <FiGithub className="w-4 h-4" />
-                  </a>
-                )}
+            {(project.liveUrl || project.repoUrl || project.repoUrls?.length) && (
+              <div className="mt-4">
+                <ProjectLinks project={project} size="sm" />
               </div>
             )}
           </div>

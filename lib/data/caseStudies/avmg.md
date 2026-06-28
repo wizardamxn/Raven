@@ -2,7 +2,7 @@
 **AVMG** is an elite, high-performance distributed media transcoding, subtitle scraping, and telemetry system powered by Next.js, Express, Redis, BullMQ, PostgreSQL, and FFmpeg.
 
 - **Status:** COMPLETED
-- **Links:** [Source Code](file:///e:/AVMG), [Live Telemetry Portal](https://avmg-b-production.up.railway.app/jobs)
+- **Links:** [Source Code](file:///e:/AVMG), [Live Telemetry Portal](https://avmg.amanahmad.xyz/jobs)
 - **Role:** Lead Architect & Principal Full-Stack Engineer
 - **Team Size:** Solo
 - **Stack:**
@@ -11,7 +11,7 @@
   - **Distributed Processing:** BullMQ 5, Redis (BullMQ Connection Rail)
   - **Media Processing:** FFmpeg (fluent-ffmpeg), youtube-dl-exec (yt-dlp wrapper)
   - **Databases & ORMs:** PostgreSQL, Prisma ORM
-  - **Cloud Infrastructure & Storage:** Supabase Cloud Storage (S3-compatible bucket), Railway (Hosting & Postgres deployment)
+  - **Cloud Infrastructure & Storage:** Supabase Cloud Storage (S3-compatible bucket), AWS EC2 (Compute & Postgres Hosting)
   - **User Interface:** Vanilla CSS, TailwindCSS, Geist Sans & Geist Mono (Vercel Fonts)
 
 ---
@@ -19,7 +19,7 @@
 ## 2. CHALLENGES & INSIGHTS
 
 - **Challenge: Ephemeral Worker Disk Exhaustion**
-  During simultaneous multi-gigabyte downloads and conversion runs (e.g., converting heavy video containers to high-resolution MP4s or generating long GIF loops), intermediate file payloads quickly consumed the local disk capacity of the containerised Railway worker nodes, leading to critical disk volume exhaustion.
+  During simultaneous multi-gigabyte downloads and conversion runs (e.g., converting heavy video containers to high-resolution MP4s or generating long GIF loops), intermediate file payloads quickly consumed the local disk capacity of the AWS EC2 worker instance, leading to critical disk volume exhaustion.
 - **Challenge: Subtitle Scraping Bloat and Overhead**
   Pulling subtitle content from remote media sources using traditional methods forced the download of the entire heavy video binary first, generating significant network latency, CPU cycles, and disk writes, even when the end-user only wanted a lightweight `.txt` transcript file.
 - **Challenge: VTT Caption Noise and Subtitle Stuttering**
