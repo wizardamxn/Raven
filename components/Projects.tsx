@@ -3,28 +3,22 @@ import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import { hasCaseStudy } from "@/lib/data/caseStudies";
 import ProjectLinks from "@/components/ProjectLinks";
+import ChapterHeading from "@/components/ChapterHeading";
+import CornerFlourish from "@/components/ornaments/CornerFlourish";
 import type { ProjectEntry } from "@/lib/data/projects";
 
-export default function RelicsSection({ projects }: { projects: ProjectEntry[] }) {
+export default function RelicsSection({ projects }: Readonly<{ projects: ProjectEntry[] }>) {
   return (
     <div
       id="relics"
-      className="w-full text-left max-w-5xl mx-auto mt-16 pt-8 border-t border-zinc-800/60 scroll-mt-28"
+      className="w-full text-left max-w-5xl mx-auto mt-16 pt-8 border-t border-gilt scroll-mt-28"
     >
-      <span className="block text-center text-base tracking-[0.4em] text-zinc-500 uppercase font-black mb-2">
-        Selected Work
-      </span>
-      <h2
-        className="font-heading text-4xl font-black tracking-wide text-center mb-4
-                   text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500"
-      >
-        Projects
-      </h2>
+      <ChapterHeading kicker="Selected Work" title="Projects" />
 
-      <div className="flex justify-center mb-12">
+      <div className="flex justify-center mb-12 -mt-4">
         <Link
           href="/projects"
-          className="group inline-flex items-center gap-2 text-base tracking-[0.15em] uppercase font-bold text-zinc-400 transition-colors hover:text-white"
+          className="group inline-flex items-center gap-2 text-base tracking-[0.15em] uppercase font-bold text-parchment-500 transition-colors hover:text-ember-300"
         >
           View All Projects
           <FiArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -34,32 +28,37 @@ export default function RelicsSection({ projects }: { projects: ProjectEntry[] }
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
         {projects.map((project) => (
           <div key={project.id} className="flex flex-col group/card">
-            {/* Project image frame */}
+            {/* Relic display case */}
             <div className="relative aspect-video transition-transform duration-500 group-hover/card:-translate-y-1">
-              <div className="relative w-full h-full rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800">
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt transition-all duration-500 group-hover/card:border-gilt-strong group-hover/card:shadow-[0_8px_32px_rgba(217,164,65,0.14)]">
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 640px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover/card:scale-105"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(5,5,8,0.55)_100%)]" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
+                <CornerFlourish corner="tl" />
+                <CornerFlourish corner="tr" />
+                <CornerFlourish corner="bl" />
+                <CornerFlourish corner="br" />
               </div>
             </div>
 
             {hasCaseStudy(project.id) ? (
               <Link href={`/projects/${project.id}`} className="group/title inline-block w-fit mt-5">
-                <h3 className="relative inline-block font-heading text-xl font-black tracking-wide text-zinc-100 transition-colors duration-300 group-hover/card:text-white">
+                <h3 className="relative inline-block font-heading text-xl font-black tracking-wide text-parchment-100 transition-colors duration-300 group-hover/card:text-ember-200">
                   {project.title}
-                  <span className="absolute left-0 -bottom-1 h-px w-0 bg-zinc-400 transition-all duration-300 group-hover/title:w-full" />
+                  <span className="absolute left-0 -bottom-1 h-px w-0 bg-ember-400 transition-all duration-300 group-hover/title:w-full" />
                 </h3>
               </Link>
             ) : (
-              <h3 className="font-heading text-xl font-black tracking-wide text-zinc-100 mt-5 transition-colors duration-300 group-hover/card:text-white">
+              <h3 className="font-heading text-xl font-black tracking-wide text-parchment-100 mt-5 transition-colors duration-300 group-hover/card:text-ember-200">
                 {project.title}
               </h3>
             )}
-            <p className="text-zinc-400 text-2xl sm:text-xl leading-relaxed mt-2 grow">
+            <p className="text-parchment-300 text-2xl sm:text-xl leading-relaxed mt-2 grow">
               {project.description}
             </p>
 
@@ -68,15 +67,14 @@ export default function RelicsSection({ projects }: { projects: ProjectEntry[] }
               {project.technologies.map((tech) => (
                 <div key={tech.name} className="relative group/tech">
                   {/* Custom Tooltip Box */}
-                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-zinc-200 bg-zinc-950 border border-zinc-700 rounded-md whitespace-nowrap opacity-0 pointer-events-none scale-95 group-hover/tech:opacity-100 group-hover/tech:scale-100 group-hover/tech:pointer-events-auto transition-all duration-200 shadow-lg z-20">
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-parchment-100 bg-ink-900 border border-gilt-strong rounded-md whitespace-nowrap opacity-0 pointer-events-none scale-95 group-hover/tech:opacity-100 group-hover/tech:scale-100 group-hover/tech:pointer-events-auto transition-all duration-200 shadow-lg z-20">
                     {tech.name}
                     {/* Tooltip Arrow */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-zinc-950" />
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1.25 border-4 border-transparent border-t-zinc-700 -z-10" />
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-ink-900" />
                   </div>
 
                   {/* Icon Container */}
-                  <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 transition-colors duration-200 hover:text-zinc-200 hover:border-zinc-700 cursor-default">
+                  <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 transition-all duration-200 hover:text-ember-300 hover:border-gilt-strong cursor-default">
                     <tech.icon className="w-5 h-5" />
                   </span>
                 </div>
@@ -92,7 +90,6 @@ export default function RelicsSection({ projects }: { projects: ProjectEntry[] }
           </div>
         ))}
       </div>
-
     </div>
   );
 }

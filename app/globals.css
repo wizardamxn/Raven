@@ -1,24 +1,55 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ================= CANDLELIT GRIMOIRE TOKENS ================= */
+
+@theme {
+  /* Ink — violet-black surface elevation ladder */
+  --color-ink-950: #06040a;
+  --color-ink-900: #0d0914;
+  --color-ink-800: #171021;
+  --color-ink-700: #221a30;
+
+  /* Ember — candlelight gold, the primary accent */
+  --color-ember-200: #f6dfa4;
+  --color-ember-300: #eec776;
+  --color-ember-400: #d9a441;
+  --color-ember-500: #b07f24;
+  --color-ember-600: #7d5a1c;
+
+  /* Arcane — magic violet, secondary accent */
+  --color-arcane-300: #c9b8f7;
+  --color-arcane-400: #a78bfa;
+  --color-arcane-500: #7c5cd6;
+  --color-arcane-600: #5b3fa8;
+
+  /* Parchment — text hierarchy ladder */
+  --color-parchment-100: #f4ecdb;
+  --color-parchment-300: #ddd2ba;
+  --color-parchment-500: #a89d85;
+  --color-parchment-700: #6e6553;
+
+  /* Gilt — gold-tinted borders */
+  --color-gilt: rgba(217, 164, 65, 0.28);
+  --color-gilt-strong: rgba(217, 164, 65, 0.5);
+  --color-gilt-faint: rgba(217, 164, 65, 0.14);
+
+  /* Wax — sealed-letter red */
+  --color-wax-500: #8c2f2f;
+  --color-wax-600: #6e2323;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-alice);
+  --font-chapter: var(--font-chapter-src);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #06040a;
+  --foreground: #ddd2ba;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
   background: var(--background);
   color: var(--foreground);
@@ -29,6 +60,16 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), serif;
 }
 
+::selection {
+  background: rgba(217, 164, 65, 0.35);
+  color: #f4ecdb;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(217, 164, 65, 0.7);
+  outline-offset: 2px;
+}
+
 @layer utilities {
   .font-heading {
     font-family: var(--font-heading), serif;
@@ -36,10 +77,101 @@ h1, h2, h3, h4, h5, h6 {
   .font-script {
     font-family: var(--font-script), cursive;
   }
+  .font-chapter {
+    font-family: var(--font-chapter-src), var(--font-heading), serif;
+  }
 }
 
+/* Illuminated drop cap — first letter of a manifesto/manuscript opener */
+.manuscript > p:first-of-type::first-letter,
+.drop-cap::first-letter {
+  font-family: var(--font-chapter-src), var(--font-heading), serif;
+  float: left;
+  font-size: 3.2em;
+  line-height: 0.85;
+  padding-right: 0.12em;
+  padding-top: 0.06em;
+  color: #d9a441;
+  text-shadow: 0 0 18px rgba(217, 164, 65, 0.35);
+}
+
+/* ================= KEYFRAMES ================= */
+
+@keyframes candle-flicker {
+  0%, 100% { opacity: 1; }
+  8%  { opacity: 0.92; }
+  22% { opacity: 0.98; }
+  36% { opacity: 0.9; }
+  52% { opacity: 1; }
+  68% { opacity: 0.95; }
+  84% { opacity: 0.88; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px rgba(217, 164, 65, 0.55));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(217, 164, 65, 0.85));
+  }
+}
+
+@keyframes ember-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-110px) scale(0.4);
+    opacity: 0;
+  }
+}
+
+@keyframes aurora {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+@keyframes mist-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) scale(1.06);
+  }
+}
+
+@keyframes bard-bar {
+  0%, 100% {
+    height: 30%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= GOTHIC BUTTON ================= */
+
 .gothic-btn-text {
-  color: #e4e4e7;
+  color: #ddd2ba;
   transition: color 0.2s ease;
 }
 
@@ -48,13 +180,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gothic-btn:hover .gothic-btn-text {
-  color: #ffffff;
+  color: #f6dfa4;
 }
 
 /* ================= SCROLLBAR ================= */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(113, 113, 122, 0.5) rgba(10, 10, 15, 0.5);
+  scrollbar-color: rgba(176, 127, 36, 0.45) rgba(13, 9, 20, 0.6);
 }
 
 ::-webkit-scrollbar {
@@ -63,18 +195,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(8, 8, 12, 0.6);
+  background: rgba(13, 9, 20, 0.6);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(113, 113, 122, 0.5);
+  background: rgba(176, 127, 36, 0.45);
   border-radius: 9999px;
-  border: 2px solid rgba(8, 8, 12, 0.6);
+  border: 2px solid rgba(13, 9, 20, 0.6);
   background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(161, 161, 170, 0.6);
+  background: rgba(217, 164, 65, 0.6);
   background-clip: padding-box;
 }
 
@@ -100,10 +232,10 @@ h1, h2, h3, h4, h5, h6 {
 .magic-cursor-dot {
   width: 12px;
   height: 12px;
-  background: radial-gradient(circle, #f5f3ff 20%, #a78bfa 70%);
+  background: radial-gradient(circle, #fdf6e3 20%, #d9a441 70%);
   border-radius: 0;
   clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
-  filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.9));
+  filter: drop-shadow(0 0 6px rgba(217, 164, 65, 0.9));
 }
 
 .magic-cursor-ring {
@@ -119,7 +251,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px dashed rgba(167, 139, 250, 0.45);
+  border: 1px dashed rgba(217, 164, 65, 0.45);
   animation: cursor-spin 14s linear infinite;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -130,8 +262,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .magic-cursor-ring--active::before {
-  border-color: rgba(196, 181, 253, 0.8);
-  box-shadow: 0 0 14px rgba(167, 139, 250, 0.35), inset 0 0 10px rgba(167, 139, 250, 0.2);
+  border-color: rgba(246, 223, 164, 0.8);
+  box-shadow: 0 0 14px rgba(217, 164, 65, 0.4), inset 0 0 10px rgba(217, 164, 65, 0.22);
 }
 
 @keyframes cursor-spin {
@@ -146,7 +278,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 8px;
   pointer-events: none;
   z-index: 9998;
-  background: radial-gradient(circle, #ede9fe 30%, #a78bfa 80%);
+  background: radial-gradient(circle, #f6dfa4 30%, #a78bfa 80%);
   clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
   transform: translate(-50%, -50%);
   animation: spark-fade 0.7s ease-out forwards;

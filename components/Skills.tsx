@@ -1,4 +1,5 @@
 import { technologies } from "@/lib/data/technologies";
+import ChapterHeading from "@/components/ChapterHeading";
 
 const categories = [
   {
@@ -44,27 +45,22 @@ const categories = [
 
 export default function Skills() {
   return (
-    <div className="w-full max-w-xl mt-16 pt-8 border-t border-zinc-800/60 text-left">
-      <span className="block text-center text-base tracking-[0.4em] text-zinc-500 uppercase font-black mb-2">
-        Toolkit
-      </span>
-      <h2 className="font-heading text-4xl font-black tracking-wide text-center mb-10 text-transparent bg-clip-text bg-linear-to-b from-white via-zinc-200 to-zinc-500">
-        Skills
-      </h2>
+    <div className="w-full max-w-xl mt-16 pt-8 border-t border-gilt text-left">
+      <ChapterHeading kicker="Toolkit" title="Skills" />
 
       <div className="flex flex-col gap-7">
         {categories.map((cat) => (
           <div key={cat.label}>
-            <span className="block text-xs tracking-[0.3em] uppercase font-black text-zinc-600 mb-3">
+            <span className="block text-xs tracking-[0.3em] uppercase font-black text-ember-500 mb-3">
               {cat.label}
             </span>
             <div className="flex flex-wrap gap-2">
               {cat.techs.map((tech) => (
                 <div
                   key={tech.name}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-zinc-900/60 border border-zinc-800 text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 transition-colors duration-200"
+                  className="group flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 hover:text-ember-300 hover:border-gilt-strong hover:shadow-[0_0_14px_rgba(217,164,65,0.18)] transition-all duration-200"
                 >
-                  <tech.icon className="w-3.5 h-3.5 shrink-0" />
+                  <tech.icon className="w-3.5 h-3.5 shrink-0 transition-colors duration-200 group-hover:text-ember-300" />
                   <span className="text-xs font-bold tracking-wider">{tech.name}</span>
                 </div>
               ))}
