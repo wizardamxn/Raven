@@ -10,7 +10,7 @@ const base =
 
 const variantClass: Record<Variant, string> = {
   primary:
-    "bg-ink-800/80 border border-gilt-strong text-ember-300 shadow-[0_0_18px_rgba(217,164,65,0.15)] hover:text-ember-200 hover:border-ember-400 hover:shadow-[0_0_28px_rgba(217,164,65,0.3)] focus-visible:border-ember-400",
+    "bg-ink-800/80 border border-gilt-strong text-ember-300 shadow-[0_0_18px_rgba(217,164,65,0.15)] hover:text-ember-200 hover:border-ember-400 hover:shadow-[0_0_28px_rgba(217,164,65,0.3)] motion-safe:hover:animate-[glow-pulse_2.8s_ease-in-out_infinite] focus-visible:border-ember-400",
   ghost:
     "bg-ink-900/60 border border-gilt text-parchment-300 hover:text-parchment-100 hover:border-gilt-strong focus-visible:border-gilt-strong",
 };

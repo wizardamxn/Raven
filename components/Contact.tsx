@@ -23,7 +23,7 @@ export default function Contact() {
 
   return (
     <div id="contact" className="w-full max-w-xl text-left scroll-mt-28">
-      <ChapterHeading kicker="Get in Touch" title="Contact" />
+      <ChapterHeading numeral="Chapter V" kicker="Get in Touch" title="Contact" />
 
       <p className="text-center font-alice text-parchment-300 text-xl leading-relaxed mb-8 -mt-2">
         Open to full-time roles, freelance work, and interesting conversations.
@@ -60,7 +60,7 @@ export default function Contact() {
         <button
           type="button"
           onClick={() => copy(EMAIL, "email")}
-          title="Copy email address"
+          aria-label="Copy email address"
           className="flex items-center justify-center w-8 h-8 rounded-lg text-parchment-500 hover:text-ember-300 hover:bg-ink-700 transition-all duration-200 shrink-0"
         >
           {copiedItem === "email"
@@ -78,7 +78,7 @@ export default function Contact() {
         <button
           type="button"
           onClick={() => copy(DISCORD, "discord")}
-          title="Copy Discord username"
+          aria-label="Copy Discord username"
           className="flex items-center justify-center w-8 h-8 rounded-lg text-parchment-500 hover:text-ember-300 hover:bg-ink-700 transition-all duration-200 shrink-0"
         >
           {copiedItem === "discord"

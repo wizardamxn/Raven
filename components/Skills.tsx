@@ -46,7 +46,7 @@ const categories = [
 export default function Skills() {
   return (
     <div className="w-full max-w-xl mt-16 pt-8 border-t border-gilt text-left">
-      <ChapterHeading kicker="Toolkit" title="Skills" />
+      <ChapterHeading numeral="Chapter IV" kicker="Toolkit" title="Skills" />
 
       <div className="flex flex-col gap-7">
         {categories.map((cat) => (

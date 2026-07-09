@@ -59,7 +59,7 @@ export default function ArcaneWidgets({
                     {week.map((day, dayIndex) => (
                       <span
                         key={dayIndex}
-                        title={day.date ? `${day.count} contribution${day.count !== 1 ? "s" : ""} on ${day.date}` : undefined}
+                        aria-label={day.date ? `${day.count} contribution${day.count !== 1 ? "s" : ""} on ${day.date}` : undefined}
                         className={`w-[11px] h-[11px] rounded-[3px] border transition-colors duration-200 hover:bg-ember-200 hover:border-ember-200 cursor-default ${levelClasses[day.level]}`}
                       />
                     ))}

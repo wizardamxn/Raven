@@ -13,7 +13,7 @@ export default function RelicsSection({ projects }: Readonly<{ projects: Project
       id="relics"
       className="w-full text-left max-w-5xl mx-auto mt-16 pt-8 border-t border-gilt scroll-mt-28"
     >
-      <ChapterHeading kicker="Selected Work" title="Projects" />
+      <ChapterHeading numeral="Chapter III" kicker="Selected Work" title="Projects" />
 
       <div className="flex justify-center mb-12 -mt-4">
         <Link

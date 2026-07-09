@@ -20,6 +20,7 @@ import Reveal from "@/components/Reveal";
 import SectionDivider from "@/components/ornaments/SectionDivider";
 import GildedArch from "@/components/ornaments/GildedArch";
 import FlameNode from "@/components/ornaments/FlameNode";
+import CornerFlourish from "@/components/ornaments/CornerFlourish";
 
 export default async function Home() {
   const [contributions, valorant, nowPlaying] = await Promise.all([
@@ -52,6 +53,24 @@ export default async function Home() {
             <circle cx="100" cy="100" r="88" strokeWidth="0.6" strokeDasharray="2 8" />
             <path d="M100 2 L103 8 L100 12 L97 8 Z" fill="currentColor" stroke="none" />
             <path d="M100 188 L103 194 L100 198 L97 194 Z" fill="currentColor" stroke="none" />
+            {/* Inner rune ring — turns once every minute and a half */}
+            <g
+              className="origin-center motion-safe:animate-[sigil-spin_90s_linear_infinite]"
+              opacity="0.7"
+            >
+              <circle cx="100" cy="100" r="78" strokeWidth="0.5" strokeDasharray="1 14" />
+              {[12, 58, 95, 141, 188, 226, 273, 322].map((angle) => (
+                <line
+                  key={angle}
+                  x1="100"
+                  y1="18"
+                  x2="100"
+                  y2="26"
+                  strokeWidth="0.8"
+                  transform={`rotate(${angle} 100 100)`}
+                />
+              ))}
+            </g>
           </svg>
 
           {/* Ambient candle glow behind the avatar */}
@@ -76,9 +95,14 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Script epigraph — the manuscript's opening line */}
+        <p className="mt-8 font-script text-2xl sm:text-3xl text-arcane-300/80 select-none">
+          Herein lies the work of
+        </p>
+
         {/* The name — this is the title */}
         <h1
-          className="mt-8 font-heading text-6xl sm:text-7xl md:text-8xl font-black tracking-wide leading-none
+          className="mt-1 font-heading text-6xl sm:text-7xl md:text-8xl font-black tracking-wide leading-none
                        text-transparent bg-clip-text bg-linear-to-b from-parchment-100 via-ember-200 to-ember-500
                        drop-shadow-[0_0_35px_rgba(217,164,65,0.2)]"
         >
@@ -138,10 +162,28 @@ export default async function Home() {
       >
         <GildedArch />
 
+        {/* Illuminated-manuscript page — double gilt rule, flourished corners, vellum grain */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute inset-2 border border-gilt">
+            <CornerFlourish corner="tl" />
+            <CornerFlourish corner="tr" />
+            <CornerFlourish corner="bl" />
+            <CornerFlourish corner="br" />
+          </div>
+          <div className="absolute inset-3.5 border border-gilt-faint" />
+          <div
+            className="absolute inset-0 mix-blend-overlay opacity-[0.04]"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+            }}
+          />
+        </div>
+
         {/* ================= EXPERIENCE ================= */}
         <Reveal className="w-full">
           <div id="chronicles" className="w-full text-left max-w-xl mx-auto scroll-mt-28 mt-6">
-            <ChapterHeading kicker="Work History" title="Experience" />
+            <ChapterHeading numeral="Chapter I" kicker="Work History" title="Experience" />
 
             <div className="flex justify-center mb-10 -mt-4">
               <Link
@@ -184,13 +226,15 @@ export default async function Home() {
 
                   <div className="flex flex-wrap gap-3 mt-4">
                     {entry.technologies.map((tech) => (
-                      <span
-                        key={tech.name}
-                        title={tech.name}
-                        className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300"
-                      >
-                        <tech.icon className="w-5 h-5" />
-                      </span>
+                      <div key={tech.name} className="relative group/tech">
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-parchment-100 bg-ink-900 border border-gilt-strong rounded-md whitespace-nowrap opacity-0 pointer-events-none scale-95 group-hover/tech:opacity-100 group-hover/tech:scale-100 transition-all duration-200 shadow-lg z-20">
+                          {tech.name}
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-ink-900" />
+                        </div>
+                        <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 transition-all duration-200 hover:text-ember-300 hover:border-gilt-strong cursor-default">
+                          <tech.icon className="w-5 h-5" />
+                        </span>
+                      </div>
                     ))}
                   </div>
                 </div>
@@ -234,7 +278,7 @@ export default async function Home() {
           <NowPlayingWidget initial={nowPlaying} />
 
           <div id="records" className="w-full text-left max-w-xl mx-auto scroll-mt-28 mt-16">
-            <ChapterHeading kicker="Live Stats" title="Activity" />
+            <ChapterHeading numeral="Chapter VI" kicker="Live Stats" title="Activity" />
 
             <div className="flex flex-col gap-12">
               <ArcaneWidgets contributions={contributions} valorant={valorant} />

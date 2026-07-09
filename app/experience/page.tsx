@@ -91,13 +91,15 @@ export default function ExperiencePage() {
 
               <div className="flex flex-wrap gap-3 mt-6">
                 {entry.technologies.map((tech) => (
-                  <span
-                    key={tech.name}
-                    title={tech.name}
-                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300"
-                  >
-                    <tech.icon className="w-5 h-5" />
-                  </span>
+                  <div key={tech.name} className="relative group/tech">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-parchment-100 bg-ink-900 border border-gilt-strong rounded-md whitespace-nowrap opacity-0 pointer-events-none scale-95 group-hover/tech:opacity-100 group-hover/tech:scale-100 transition-all duration-200 shadow-lg z-20">
+                      {tech.name}
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-ink-900" />
+                    </div>
+                    <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 transition-all duration-200 hover:text-ember-300 hover:border-gilt-strong cursor-default">
+                      <tech.icon className="w-5 h-5" />
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>

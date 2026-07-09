@@ -97,6 +97,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ================= KEYFRAMES ================= */
 
+@keyframes sigil-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes candle-flicker {
   0%, 100% { opacity: 1; }
   8%  { opacity: 0.92; }

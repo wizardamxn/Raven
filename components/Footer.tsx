@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FiGithub, FiLinkedin, FiInstagram } from "react-icons/fi";
 import { SiDiscord } from "react-icons/si";
+import { GiRaven } from "react-icons/gi";
 
 const nameClass =
   "font-script leading-tight inline-block text-transparent bg-clip-text " +
@@ -12,9 +13,14 @@ const socialLinkClass =
 export default function Footer() {
   return (
     <footer className="relative z-10 w-full flex flex-col items-center mt-16 mb-4 select-none overflow-x-hidden">
-      <span className="text-parchment-500 text-sm tracking-[0.4em] uppercase mb-5">
-        ❖ Conjured with care by ❖
-      </span>
+      {/* Colophon rule — gilt hairlines meeting at a diamond */}
+      <div className="flex items-center gap-4 mb-5">
+        <span aria-hidden className="h-px w-12 sm:w-20 bg-linear-to-r from-transparent to-gilt-strong" />
+        <span className="text-parchment-500 text-sm tracking-[0.4em] uppercase whitespace-nowrap">
+          Conjured with care by
+        </span>
+        <span aria-hidden className="h-px w-12 sm:w-20 bg-linear-to-l from-transparent to-gilt-strong" />
+      </div>
 
       <div className="flex flex-row items-center justify-center gap-5 sm:gap-8 w-full max-w-2xl px-8 sm:px-12">
         {/* Portrait */}
@@ -34,6 +40,18 @@ export default function Footer() {
           <span className={`${nameClass} text-lg sm:text-4xl -mt-1`}>aka Shout</span>
           <span className={`${nameClass} text-lg sm:text-4xl -mt-1`}>aka Wizardamxn</span>
         </div>
+
+        {/* Wax seal — the colophon's stamp */}
+        <div
+          aria-hidden
+          className="relative flex items-center justify-center w-10 h-10 sm:w-14 sm:h-14 rounded-full shrink-0 self-end mb-1 -rotate-12 select-none
+                     bg-[radial-gradient(circle_at_35%_30%,#a84040_0%,#8c2f2f_45%,#5c1d1d_100%)]
+                     border border-gilt-strong
+                     shadow-[0_4px_16px_rgba(0,0,0,0.6),inset_0_1px_4px_rgba(255,255,255,0.12),inset_0_-3px_8px_rgba(0,0,0,0.45)]"
+        >
+          <span className="absolute inset-1.5 rounded-full border border-ember-200/25" />
+          <GiRaven className="w-4 h-4 sm:w-6 sm:h-6 text-ember-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
+        </div>
       </div>
 
       {/* Socials */}
@@ -42,7 +60,7 @@ export default function Footer() {
           href="https://github.com/Valtryek"
           target="_blank"
           rel="noopener noreferrer"
-          title="GitHub"
+          aria-label="GitHub"
           className={socialLinkClass}
         >
           <FiGithub className="w-4 h-4" />
@@ -51,7 +69,7 @@ export default function Footer() {
           href="https://linkedin.com/in/amanahmad1"
           target="_blank"
           rel="noopener noreferrer"
-          title="LinkedIn"
+          aria-label="LinkedIn"
           className={socialLinkClass}
         >
           <FiLinkedin className="w-4 h-4" />
@@ -60,7 +78,7 @@ export default function Footer() {
           href="https://instagram.com/aman_ahmad04"
           target="_blank"
           rel="noopener noreferrer"
-          title="Instagram"
+          aria-label="Instagram"
           className={socialLinkClass}
         >
           <FiInstagram className="w-4 h-4" />
@@ -72,7 +90,7 @@ export default function Footer() {
             wizardamxn
             <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-ink-900" />
           </div>
-          <span className={`${socialLinkClass} cursor-default`} title="Discord: wizardamxn">
+          <span className={`${socialLinkClass} cursor-default`} aria-label="Discord: wizardamxn">
             <SiDiscord className="w-4 h-4" />
           </span>
         </div>

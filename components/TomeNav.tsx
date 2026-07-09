@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
@@ -82,6 +82,20 @@ export default function TomeNav() {
     />
   );
 
+  // Tiny gem above the chapter you're reading
+  const activeGem = (active: boolean) =>
+    active ? (
+      <span
+        aria-hidden
+        className="absolute left-1/2 -translate-x-1/2 -top-0.5 w-1 h-1 rotate-45 bg-ember-400 shadow-[0_0_6px_rgba(217,164,65,0.8)]"
+      />
+    ) : null;
+
+  // Gilt diamond separating the desktop links
+  const diamond = (
+    <span aria-hidden className="block w-1 h-1 rotate-45 bg-ember-500/40 select-none" />
+  );
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
@@ -107,25 +121,24 @@ export default function TomeNav() {
         </Link>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) =>
-            link.href === "/#contact" ? (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={handleContactClick}
-                className={linkClass(false)}
-              >
-                {link.label}
-                {underline(false)}
-              </Link>
-            ) : (
-              <Link key={link.href} href={link.href} className={linkClass(isActive(link.href))}>
-                {link.label}
-                {underline(isActive(link.href))}
-              </Link>
-            )
-          )}
+        <div className="hidden md:flex items-center gap-6">
+          {links.map((link, i) => (
+            <Fragment key={link.href}>
+              {i > 0 && diamond}
+              {link.href === "/#contact" ? (
+                <Link href={link.href} onClick={handleContactClick} className={linkClass(false)}>
+                  {link.label}
+                  {underline(false)}
+                </Link>
+              ) : (
+                <Link href={link.href} className={linkClass(isActive(link.href))}>
+                  {link.label}
+                  {underline(isActive(link.href))}
+                  {activeGem(isActive(link.href))}
+                </Link>
+              )}
+            </Fragment>
+          ))}
         </div>
 
         {/* Mobile: wax-seal toggle */}
@@ -178,8 +191,13 @@ export default function TomeNav() {
           </div>
         </div>
       </nav>
-      {/* Gilt hairline */}
-      <div aria-hidden className="h-px w-full bg-linear-to-r from-transparent via-gilt-strong to-transparent" />
+      {/* Gilt hairline — brightens once the reader descends */}
+      <div
+        aria-hidden
+        className={`h-px w-full bg-linear-to-r from-transparent to-transparent transition-colors duration-300 ${
+          scrolled ? "via-ember-400/70" : "via-gilt-strong"
+        }`}
+      />
     </header>
   );
 }
