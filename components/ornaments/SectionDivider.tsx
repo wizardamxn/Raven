@@ -52,7 +52,7 @@ export default function SectionDivider({
               d="M60 4 L67 12 L60 20 L53 12 Z"
               stroke="currentColor"
               strokeWidth="1.2"
-              fill="rgba(216,58,69,0.12)"
+              fill="rgba(79,124,240,0.12)"
             />
             <circle cx="60" cy="12" r="1.6" fill="currentColor" />
             {/* Side curls */}

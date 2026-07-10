@@ -88,7 +88,7 @@ export default function TomeNav() {
     active ? (
       <span
         aria-hidden
-        className="absolute left-1/2 -translate-x-1/2 -top-0.5 w-1 h-1 rotate-45 bg-ember-400 shadow-[0_0_6px_rgba(216,58,69,0.8)]"
+        className="absolute left-1/2 -translate-x-1/2 -top-0.5 w-1 h-1 rotate-45 bg-ember-400 shadow-[0_0_6px_rgba(79,124,240,0.8)]"
       />
     ) : null;
 

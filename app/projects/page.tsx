@@ -123,7 +123,7 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* Icon Container */}
-                    <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 transition-all duration-200 hover:text-ember-300 hover:border-gilt-strong hover:shadow-[0_0_14px_rgba(216,58,69,0.2)] cursor-default">
+                    <span className="flex items-center justify-center w-9 h-9 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 transition-all duration-200 hover:text-ember-300 hover:border-gilt-strong hover:shadow-[0_0_14px_rgba(79,124,240,0.2)] cursor-default">
                       <tech.icon className="w-5 h-5" />
                     </span>
                   </div>

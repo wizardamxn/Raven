@@ -38,7 +38,7 @@ export default function ExperiencePage() {
           </p>
         </div>
 
-        <div className="flex flex-col gap-16 relative ml-4 pl-6 border-l border-transparent [border-image:linear-gradient(to_bottom,rgba(216,58,69,0.5),rgba(216,58,69,0.08))_1]">
+        <div className="flex flex-col gap-16 relative ml-4 pl-6 border-l border-transparent [border-image:linear-gradient(to_bottom,rgba(79,124,240,0.5),rgba(79,124,240,0.08))_1]">
           {experiences.map((entry, index) => (
             <div key={entry.id} className="relative">
               {/* Timeline Node */}

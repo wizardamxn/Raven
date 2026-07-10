@@ -31,7 +31,7 @@ export default function ChapterFlourish() {
         d="M90 2 L94 7 L90 12 L86 7 Z"
         stroke="currentColor"
         strokeWidth="1"
-        fill="rgba(216,58,69,0.15)"
+        fill="rgba(79,124,240,0.15)"
         initial={{ pathLength: 0, opacity: 0 }}
         animate={{ pathLength: drawn ? 1 : 0, opacity: drawn ? 1 : 0 }}
         transition={diamond}

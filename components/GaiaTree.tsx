@@ -53,20 +53,20 @@ export default function GaiaTree() {
 
       {/* Mobile moon — smaller, same design */}
       <div className="absolute right-5 top-20 md:hidden opacity-80">
-        <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,rgba(255,214,217,0.12)_0%,rgba(255,214,217,0)_70%)]" />
+        <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,rgba(205,221,255,0.12)_0%,rgba(205,221,255,0)_70%)]" />
         <svg viewBox="0 0 120 120" className="relative h-20 w-20">
-          <circle cx="60" cy="60" r="32" fill="rgba(255,214,217,0.16)" stroke="rgba(216,58,69,0.45)" strokeWidth="1" />
-          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(216,58,69,0.35)" strokeWidth="0.8" strokeDasharray="3 9" />
+          <circle cx="60" cy="60" r="32" fill="rgba(205,221,255,0.16)" stroke="rgba(79,124,240,0.45)" strokeWidth="1" />
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(79,124,240,0.35)" strokeWidth="0.8" strokeDasharray="3 9" />
         </svg>
       </div>
 
       {/* ── Moonlight — one soft blurred shaft falling from the moon ── */}
       <ParallaxLayer speed={0.1} className="absolute right-[-4vw] top-[4vh] h-[80vh] w-[30vw] hidden md:block">
-        <div className="h-full w-full origin-top-right rotate-18 blur-3xl bg-linear-to-b from-[rgba(255,214,217,0.07)] via-[rgba(255,214,217,0.025)] to-transparent" />
+        <div className="h-full w-full origin-top-right rotate-18 blur-3xl bg-linear-to-b from-[rgba(205,221,255,0.07)] via-[rgba(205,221,255,0.025)] to-transparent" />
       </ParallaxLayer>
 
       {/* Soft light bloom crowning the tome's arch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[38vh] w-[60vw] bg-[radial-gradient(ellipse_at_50%_0%,rgba(216,58,69,0.07)_0%,rgba(216,58,69,0)_65%)]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[38vh] w-[60vw] bg-[radial-gradient(ellipse_at_50%_0%,rgba(79,124,240,0.07)_0%,rgba(79,124,240,0)_65%)]" />
 
       {/* ── The horizon — a gothic abbey skyline, sunk into the painted peaks so
           it reads as the nearest ridge rather than a cut-out over the image ── */}
@@ -109,18 +109,18 @@ export default function GaiaTree() {
         {/* Moon-kissed rims on the tallest silhouettes */}
         <path
           d="M202 128 L228 190 M1184 100 L1212 180 M1034 160 L1160 240"
-          stroke="rgba(216,58,69,0.16)"
+          stroke="rgba(79,124,240,0.16)"
           strokeWidth="1"
           fill="none"
         />
 
         {/* The rose window — faint gilt tracery, still glowing */}
         <g className="motion-safe:animate-[candle-flicker_11s_ease-in-out_infinite]">
-          <circle cx="1034" cy="212" r="17" fill="rgba(216,58,69,0.10)" stroke="rgba(216,58,69,0.35)" strokeWidth="1" />
-          <circle cx="1034" cy="212" r="6" fill="none" stroke="rgba(216,58,69,0.3)" strokeWidth="0.8" />
+          <circle cx="1034" cy="212" r="17" fill="rgba(79,124,240,0.10)" stroke="rgba(79,124,240,0.35)" strokeWidth="1" />
+          <circle cx="1034" cy="212" r="6" fill="none" stroke="rgba(79,124,240,0.3)" strokeWidth="0.8" />
           <path
             d="M1034 195 L1034 229 M1017 212 L1051 212 M1022 200 L1046 224 M1046 200 L1022 224"
-            stroke="rgba(216,58,69,0.28)"
+            stroke="rgba(79,124,240,0.28)"
             strokeWidth="0.8"
           />
         </g>
@@ -131,7 +131,7 @@ export default function GaiaTree() {
       </ParallaxLayer>
 
       {/* ── Warm candle light rising behind the tome ── */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[42vh] w-[95vw] bg-[radial-gradient(ellipse_at_50%_100%,rgba(216,58,69,0.12)_0%,rgba(216,58,69,0.04)_45%,rgba(216,58,69,0)_70%)] motion-safe:animate-[candle-flicker_9s_ease-in-out_infinite]" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[42vh] w-[95vw] bg-[radial-gradient(ellipse_at_50%_100%,rgba(79,124,240,0.12)_0%,rgba(79,124,240,0.04)_45%,rgba(79,124,240,0)_70%)] motion-safe:animate-[candle-flicker_9s_ease-in-out_infinite]" />
 
       {/* ── Ground fog over the skyline — seats the painted peaks into the tome ── */}
       <div className="absolute bottom-0 inset-x-0 h-64 bg-linear-to-t from-ink-900 via-ink-800/50 to-transparent" />

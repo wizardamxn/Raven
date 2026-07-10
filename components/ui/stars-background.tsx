@@ -161,7 +161,7 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
           );
           const alpha = Math.max(0, 1 - midDist / CELL) * 0.3;
           if (alpha < 0.02) continue;
-          ctx.strokeStyle = `rgba(216, 58, 69, ${alpha.toFixed(3)})`;
+          ctx.strokeStyle = `rgba(79, 124, 240, ${alpha.toFixed(3)})`;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(b.x, b.y);
