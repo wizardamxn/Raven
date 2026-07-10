@@ -20,7 +20,7 @@ export default function SoundToggle() {
         {enabled ? (
           <path
             d="M9 1 C11 4 12.5 5.5 12.5 7.6 A3.5 3.5 0 0 1 5.5 7.6 C5.5 5.5 7 4 9 1 Z"
-            fill="#f6dfa4"
+            fill="#ffd6d9"
             className="motion-safe:animate-[candle-flicker_3s_ease-in-out_infinite] origin-bottom"
           />
         ) : (
@@ -40,8 +40,8 @@ export default function SoundToggle() {
           width="6"
           height="8"
           rx="1"
-          fill={enabled ? "rgba(217,164,65,0.85)" : "rgba(110,101,83,0.55)"}
-          stroke="rgba(217,164,65,0.4)"
+          fill={enabled ? "rgba(216,58,69,0.85)" : "rgba(110,101,83,0.55)"}
+          stroke="rgba(216,58,69,0.4)"
           strokeWidth="0.8"
         />
       </svg>

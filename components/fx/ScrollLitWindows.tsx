@@ -43,7 +43,7 @@ export default function ScrollLitWindows() {
             <path
               d="M-1.6 2.6 L-1.6 -0.4 Q0 -2.8 1.6 -0.4 L1.6 2.6 Z"
               transform={`translate(${w.x} ${w.y})`}
-              fill="#eec776"
+              fill="#f59aa0"
               opacity="0.7"
               className="motion-safe:animate-[candle-flicker_var(--dur)_ease-in-out_infinite]"
               style={{ "--dur": `${w.duration}s` } as React.CSSProperties}

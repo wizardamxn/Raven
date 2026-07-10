@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { StarsBackground } from "@/components/ui/stars-background";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import AuroraVeil from "@/components/ui/aurora-veil";
@@ -20,8 +21,27 @@ export default function GaiaTree() {
       aria-hidden
       className="night-scene pointer-events-none fixed inset-0 z-0 overflow-hidden select-none transition-[filter] duration-1000"
     >
-      {/* ── The arcane sky — aurora ribbons, twinkling starfield, falling stars ── */}
-      <AuroraVeil />
+      {/* ── The backdrop — the painted night panorama that sets the whole key ── */}
+      <Image
+        src="/Sky10Ann-Hero-bg.jpg"
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center opacity-70"
+      />
+      {/* Ink grade — deepen the sky's crown and floor so the hero text and the
+          tome keep contrast, while the nebula stays legible through the middle.
+          A touch of violet in the wash marries the cool image to the grimoire. */}
+      <div className="absolute inset-0 bg-linear-to-b from-ink-950/85 via-ink-950/30 to-ink-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_120%_80%_at_50%_38%,transparent_35%,rgba(6,4,10,0.55)_100%)]" />
+      <div className="absolute inset-0 bg-arcane-600/8 mix-blend-overlay" />
+
+      {/* ── The arcane sky — aurora softened to a shimmer so it enhances the
+          image's nebula instead of competing with it ── */}
+      <div className="opacity-40">
+        <AuroraVeil />
+      </div>
       <StarsBackground />
       <ShootingStars />
       <MeteorShower />
@@ -33,23 +53,27 @@ export default function GaiaTree() {
 
       {/* Mobile moon — smaller, same design */}
       <div className="absolute right-5 top-20 md:hidden opacity-80">
-        <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,rgba(246,223,164,0.12)_0%,rgba(246,223,164,0)_70%)]" />
+        <div className="absolute -inset-10 rounded-full bg-[radial-gradient(circle,rgba(255,214,217,0.12)_0%,rgba(255,214,217,0)_70%)]" />
         <svg viewBox="0 0 120 120" className="relative h-20 w-20">
-          <circle cx="60" cy="60" r="32" fill="rgba(246,223,164,0.16)" stroke="rgba(217,164,65,0.45)" strokeWidth="1" />
-          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(217,164,65,0.35)" strokeWidth="0.8" strokeDasharray="3 9" />
+          <circle cx="60" cy="60" r="32" fill="rgba(255,214,217,0.16)" stroke="rgba(216,58,69,0.45)" strokeWidth="1" />
+          <circle cx="60" cy="60" r="46" fill="none" stroke="rgba(216,58,69,0.35)" strokeWidth="0.8" strokeDasharray="3 9" />
         </svg>
       </div>
 
       {/* ── Moonlight — one soft blurred shaft falling from the moon ── */}
       <ParallaxLayer speed={0.1} className="absolute right-[-4vw] top-[4vh] h-[80vh] w-[30vw] hidden md:block">
-        <div className="h-full w-full origin-top-right rotate-18 blur-3xl bg-linear-to-b from-[rgba(246,223,164,0.07)] via-[rgba(246,223,164,0.025)] to-transparent" />
+        <div className="h-full w-full origin-top-right rotate-18 blur-3xl bg-linear-to-b from-[rgba(255,214,217,0.07)] via-[rgba(255,214,217,0.025)] to-transparent" />
       </ParallaxLayer>
 
       {/* Soft light bloom crowning the tome's arch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[38vh] w-[60vw] bg-[radial-gradient(ellipse_at_50%_0%,rgba(217,164,65,0.07)_0%,rgba(217,164,65,0)_65%)]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[38vh] w-[60vw] bg-[radial-gradient(ellipse_at_50%_0%,rgba(216,58,69,0.07)_0%,rgba(216,58,69,0)_65%)]" />
 
-      {/* ── The horizon — a gothic abbey skyline in silhouette ── */}
-      <ParallaxLayer speed={0.05} className="absolute bottom-0 inset-x-0 h-[34vh]">
+      {/* ── The horizon — a gothic abbey skyline, sunk into the painted peaks so
+          it reads as the nearest ridge rather than a cut-out over the image ── */}
+      <ParallaxLayer
+        speed={0.05}
+        className="absolute bottom-0 inset-x-0 h-[34vh] opacity-85 mask-[linear-gradient(to_top,black_55%,transparent_100%)]"
+      >
       <svg
         viewBox="0 0 1440 340"
         preserveAspectRatio="xMidYMax slice"
@@ -85,18 +109,18 @@ export default function GaiaTree() {
         {/* Moon-kissed rims on the tallest silhouettes */}
         <path
           d="M202 128 L228 190 M1184 100 L1212 180 M1034 160 L1160 240"
-          stroke="rgba(217,164,65,0.16)"
+          stroke="rgba(216,58,69,0.16)"
           strokeWidth="1"
           fill="none"
         />
 
         {/* The rose window — faint gilt tracery, still glowing */}
         <g className="motion-safe:animate-[candle-flicker_11s_ease-in-out_infinite]">
-          <circle cx="1034" cy="212" r="17" fill="rgba(217,164,65,0.10)" stroke="rgba(217,164,65,0.35)" strokeWidth="1" />
-          <circle cx="1034" cy="212" r="6" fill="none" stroke="rgba(217,164,65,0.3)" strokeWidth="0.8" />
+          <circle cx="1034" cy="212" r="17" fill="rgba(216,58,69,0.10)" stroke="rgba(216,58,69,0.35)" strokeWidth="1" />
+          <circle cx="1034" cy="212" r="6" fill="none" stroke="rgba(216,58,69,0.3)" strokeWidth="0.8" />
           <path
             d="M1034 195 L1034 229 M1017 212 L1051 212 M1022 200 L1046 224 M1046 200 L1022 224"
-            stroke="rgba(217,164,65,0.28)"
+            stroke="rgba(216,58,69,0.28)"
             strokeWidth="0.8"
           />
         </g>
@@ -107,10 +131,10 @@ export default function GaiaTree() {
       </ParallaxLayer>
 
       {/* ── Warm candle light rising behind the tome ── */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[42vh] w-[95vw] bg-[radial-gradient(ellipse_at_50%_100%,rgba(217,164,65,0.12)_0%,rgba(217,164,65,0.04)_45%,rgba(217,164,65,0)_70%)] motion-safe:animate-[candle-flicker_9s_ease-in-out_infinite]" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[42vh] w-[95vw] bg-[radial-gradient(ellipse_at_50%_100%,rgba(216,58,69,0.12)_0%,rgba(216,58,69,0.04)_45%,rgba(216,58,69,0)_70%)] motion-safe:animate-[candle-flicker_9s_ease-in-out_infinite]" />
 
-      {/* ── Ground fog over the skyline ── */}
-      <div className="absolute bottom-0 inset-x-0 h-52 bg-linear-to-t from-ink-700/70 via-ink-800/35 to-transparent" />
+      {/* ── Ground fog over the skyline — seats the painted peaks into the tome ── */}
+      <div className="absolute bottom-0 inset-x-0 h-64 bg-linear-to-t from-ink-900 via-ink-800/50 to-transparent" />
       <div className="absolute -bottom-10 left-0 h-64 w-[50vw] bg-[radial-gradient(ellipse_at_15%_100%,rgba(34,26,48,0.75)_0%,rgba(34,26,48,0)_70%)] motion-safe:animate-[mist-drift_26s_ease-in-out_infinite]" />
       <div className="absolute -bottom-10 right-0 h-64 w-[50vw] bg-[radial-gradient(ellipse_at_85%_100%,rgba(34,26,48,0.75)_0%,rgba(34,26,48,0)_70%)] motion-safe:animate-[mist-drift_34s_ease-in-out_-12s_infinite]" />
 

@@ -82,7 +82,7 @@ export default async function Home() {
               </Link>
             </div>
 
-            <div className="flex flex-col gap-10 relative ml-4 pl-6 border-l border-transparent [border-image:linear-gradient(to_bottom,rgba(217,164,65,0.5),rgba(217,164,65,0.08))_1]">
+            <div className="flex flex-col gap-10 relative ml-4 pl-6 border-l border-transparent [border-image:linear-gradient(to_bottom,rgba(216,58,69,0.5),rgba(216,58,69,0.08))_1]">
               {experiences.slice(0, 2).map((entry) => (
                 <div key={entry.id} className="relative">
                   {/* Timeline Node */}

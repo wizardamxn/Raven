@@ -34,7 +34,7 @@ export default function TiltCard({
   });
   const gx = useTransform(mx, [-0.5, 0.5], ["28%", "72%"]);
   const gy = useTransform(my, [-0.5, 0.5], ["22%", "78%"]);
-  const sheen = useMotionTemplate`radial-gradient(circle at ${gx} ${gy}, rgba(246,223,164,0.16), rgba(246,223,164,0) 55%)`;
+  const sheen = useMotionTemplate`radial-gradient(circle at ${gx} ${gy}, rgba(255,214,217,0.16), rgba(255,214,217,0) 55%)`;
 
   useEffect(() => {
     setEnabled(

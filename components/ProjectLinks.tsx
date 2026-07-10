@@ -46,7 +46,7 @@ function LinkIcon({
           rel="noopener noreferrer"
           className={`flex items-center justify-center ${box} rounded-lg transition-all duration-200 ${
             primary
-              ? "bg-ink-800/80 border border-gilt-strong text-ember-300 shadow-[0_0_12px_rgba(217,164,65,0.12)] hover:text-ember-200 hover:border-ember-400"
+              ? "bg-ink-800/80 border border-gilt-strong text-ember-300 shadow-[0_0_12px_rgba(216,58,69,0.12)] hover:text-ember-200 hover:border-ember-400"
               : "bg-ink-800/70 border border-gilt text-parchment-300 hover:text-ember-300 hover:border-gilt-strong"
           }`}
         >

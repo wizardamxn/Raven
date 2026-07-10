@@ -58,7 +58,7 @@ export default function Skills() {
               {cat.techs.map((tech) => (
                 <div
                   key={tech.name}
-                  className="group tech-chip flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 hover:text-ember-300 hover:border-gilt-strong hover:shadow-[0_0_14px_rgba(217,164,65,0.18)] transition-all duration-200"
+                  className="group tech-chip flex items-center gap-2 px-3 py-1.5 rounded-lg bg-ink-800/70 border border-gilt text-parchment-300 hover:text-ember-300 hover:border-gilt-strong hover:shadow-[0_0_14px_rgba(216,58,69,0.18)] transition-all duration-200"
                 >
                   <tech.icon className="w-3.5 h-3.5 shrink-0 transition-colors duration-200 group-hover:text-ember-300" />
                   <span className="text-xs font-bold tracking-wider">{tech.name}</span>

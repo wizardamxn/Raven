@@ -103,10 +103,10 @@ export default function Hero() {
         {/* Ambient candle glow behind the avatar */}
         <div
           aria-hidden
-          className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.22)_0%,rgba(217,164,65,0)_70%)] animate-[candle-flicker_5s_ease-in-out_infinite] pointer-events-none"
+          className="absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgba(216,58,69,0.22)_0%,rgba(216,58,69,0)_70%)] animate-[candle-flicker_5s_ease-in-out_infinite] pointer-events-none"
         />
         {/* Double gilded frame */}
-        <div className="relative w-28 h-28 rounded-full p-0.75 bg-linear-to-b from-ember-300 via-ember-500 to-ember-600 shadow-[0_0_30px_rgba(217,164,65,0.25)]">
+        <div className="relative w-28 h-28 rounded-full p-0.75 bg-linear-to-b from-ember-300 via-ember-500 to-ember-600 shadow-[0_0_30px_rgba(216,58,69,0.25)]">
           <div className="w-full h-full rounded-full p-0.75 bg-ink-900">
             <div className="w-full h-full rounded-full overflow-hidden relative">
               <Image
@@ -135,7 +135,7 @@ export default function Hero() {
         variants={rise}
         className="mt-1 font-heading text-6xl sm:text-7xl md:text-8xl font-black tracking-wide leading-none
                      text-transparent bg-clip-text bg-linear-to-b from-parchment-100 via-ember-200 to-ember-500
-                     drop-shadow-[0_0_35px_rgba(217,164,65,0.2)]"
+                     drop-shadow-[0_0_35px_rgba(216,58,69,0.2)]"
       >
         Aman Ahmad
       </m.h1>
