@@ -148,7 +148,7 @@ export default function RavenCompanion() {
                    drop-shadow-[0_6px_18px_rgba(0,0,0,0.4)]"
         style={{
           animation: "raven-fly-across 3.2s cubic-bezier(0.25, 0.1, 0.35, 1) forwards",
-          filter: "drop-shadow(0 0 22px rgba(79,124,240,0.28))",
+          filter: "drop-shadow(0 0 22px rgba(218,227,244,0.28))",
         }}
       >
         <Image
@@ -185,7 +185,7 @@ export default function RavenCompanion() {
       <svg
         viewBox="0 0 48 44"
         className={`w-full h-full overflow-visible
-                    [filter:drop-shadow(0_2px_6px_rgba(0,0,0,0.8))_drop-shadow(0_0_12px_rgba(79,124,240,0.3))]
+                    [filter:drop-shadow(0_2px_6px_rgba(0,0,0,0.8))_drop-shadow(0_0_12px_rgba(218,227,244,0.3))]
                     ${ruffling ? "raven-ruffling" : ""}`}
         aria-hidden
       >
@@ -193,21 +193,21 @@ export default function RavenCompanion() {
         <path
           d="M30 27 L46 35 L44 38 L31 33 Z"
           fill="#171021"
-          stroke="rgba(79,124,240,0.5)"
+          stroke="rgba(218,227,244,0.5)"
           strokeWidth="0.7"
         />
         {/* Body */}
         <path
           d="M13 29 C13 22 19 18 25 19 C32 20 35 26 33 32 C31.5 36.5 27 39 22.5 38.5 C17 38 13 34.5 13 29 Z"
           fill="#171021"
-          stroke="rgba(79,124,240,0.55)"
+          stroke="rgba(218,227,244,0.55)"
           strokeWidth="0.8"
         />
         {/* Moonlit rim along the back */}
         <path
           d="M14 26 C17 20.5 22.5 18.2 27.5 19.4"
           fill="none"
-          stroke="rgba(205,221,255,0.55)"
+          stroke="rgba(246,249,255,0.55)"
           strokeWidth="0.9"
           strokeLinecap="round"
         />
@@ -215,7 +215,7 @@ export default function RavenCompanion() {
         <path
           d="M19 25 C25 22 32 24 33 29 C33.5 32 31 35.5 27 36 C29 32 26 27 19 25 Z"
           fill="#2c2140"
-          stroke="rgba(79,124,240,0.35)"
+          stroke="rgba(218,227,244,0.35)"
           strokeWidth="0.6"
         />
         {/* Legs */}
@@ -235,7 +235,7 @@ export default function RavenCompanion() {
             cy="15"
             r="7"
             fill="#171021"
-            stroke="rgba(79,124,240,0.55)"
+            stroke="rgba(218,227,244,0.55)"
             strokeWidth="0.8"
           />
           {/* Neck fill so the head connects to the body at any angle */}
@@ -244,7 +244,7 @@ export default function RavenCompanion() {
           <path
             d="M10.5 11 C12.5 8.6 17 8.4 19.5 10.6"
             fill="none"
-            stroke="rgba(205,221,255,0.5)"
+            stroke="rgba(246,249,255,0.5)"
             strokeWidth="0.8"
             strokeLinecap="round"
           />
@@ -252,19 +252,19 @@ export default function RavenCompanion() {
           <path
             d="M9 13.5 L1 16 L9 18 C8.4 16.6 8.4 14.9 9 13.5 Z"
             fill="#2c2140"
-            stroke="rgba(79,124,240,0.5)"
+            stroke="rgba(218,227,244,0.5)"
             strokeWidth="0.6"
           />
           {/* Ember eye — halo, iris, glint */}
-          <circle cx="13.5" cy="13.5" r="3.2" fill="rgba(79,124,240,0.25)" />
+          <circle cx="13.5" cy="13.5" r="3.2" fill="rgba(218,227,244,0.25)" />
           <circle
             className="raven-eye"
             cx="13.5"
             cy="13.5"
             r="1.7"
-            fill="#4f7cf0"
+            fill="#dae3f4"
           />
-          <circle cx="14" cy="13" r="0.5" fill="#cdddff" />
+          <circle cx="14" cy="13" r="0.5" fill="#fbfdff" />
         </g>
       </svg>
     </button>

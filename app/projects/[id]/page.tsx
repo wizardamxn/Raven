@@ -187,7 +187,7 @@ export default async function CaseStudyPage({
         </div>
 
         {/* The illuminated reading panel */}
-        <article className="manuscript rounded-xl bg-[#120d18] border border-gilt-faint px-6 sm:px-10 py-10 shadow-[inset_0_1px_0_rgba(205,221,255,0.04)]">
+        <article className="manuscript rounded-xl bg-[#120d18] border border-gilt-faint px-6 sm:px-10 py-10 shadow-[inset_0_1px_0_rgba(246,249,255,0.04)]">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={markdownComponents}

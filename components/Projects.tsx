@@ -35,7 +35,7 @@ export default function RelicsSection({ projects }: Readonly<{ projects: Project
             <TiltCard className="aspect-video">
               <div className="relative w-full h-full transition-transform duration-500 group-hover/card:-translate-y-1">
                 <ViewTransition name={`relic-${project.id}`} share="morph">
-                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt transition-all duration-500 group-hover/card:border-gilt-strong group-hover/card:shadow-[0_8px_32px_rgba(79,124,240,0.14)]">
+                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt transition-all duration-500 group-hover/card:border-gilt-strong group-hover/card:shadow-[0_8px_32px_rgba(218,227,244,0.14)]">
                     <Image
                       src={project.image}
                       alt={project.title}

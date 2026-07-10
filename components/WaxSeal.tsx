@@ -54,7 +54,7 @@ export default function WaxSeal({ email }: Readonly<{ email: string }>) {
         {/* Candle glow on hover */}
         <span
           aria-hidden
-          className="absolute -inset-3 rounded-full bg-[radial-gradient(circle,rgba(79,124,240,0.25)_0%,rgba(79,124,240,0)_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="absolute -inset-3 rounded-full bg-[radial-gradient(circle,rgba(218,227,244,0.25)_0%,rgba(218,227,244,0)_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         />
 
         {/* Cracks — race outward when the wax is stamped */}

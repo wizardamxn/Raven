@@ -73,18 +73,18 @@ export default function ArcaneMoon() {
   return (
     <div ref={wrapRef} style={{ "--moon-glow": "0" } as React.CSSProperties}>
       {/* Wide halo */}
-      <div className="absolute -inset-28 rounded-full bg-[radial-gradient(circle,rgba(205,221,255,0.14)_0%,rgba(205,221,255,0.05)_45%,rgba(205,221,255,0)_70%)]" />
+      <div className="absolute -inset-28 rounded-full bg-[radial-gradient(circle,rgba(246,249,255,0.14)_0%,rgba(246,249,255,0.05)_45%,rgba(246,249,255,0)_70%)]" />
       {/* Awakened halo — blooms as the cursor nears */}
       <div
-        className="absolute -inset-28 rounded-full bg-[radial-gradient(circle,rgba(205,221,255,0.18)_0%,rgba(205,221,255,0.06)_45%,rgba(205,221,255,0)_70%)] transition-opacity duration-500"
+        className="absolute -inset-28 rounded-full bg-[radial-gradient(circle,rgba(246,249,255,0.18)_0%,rgba(246,249,255,0.06)_45%,rgba(246,249,255,0)_70%)] transition-opacity duration-500"
         style={{ opacity: "var(--moon-glow)" }}
       />
       <svg viewBox="0 0 160 160" className="relative h-36 w-36 lg:h-44 lg:w-44">
         <defs>
           <radialGradient id="moon-glow" cx="0.42" cy="0.4" r="0.75">
             <stop offset="0" stopColor="rgba(250,238,205,0.6)" />
-            <stop offset="0.55" stopColor="rgba(205,221,255,0.35)" />
-            <stop offset="1" stopColor="rgba(79,124,240,0.18)" />
+            <stop offset="0.55" stopColor="rgba(246,249,255,0.35)" />
+            <stop offset="1" stopColor="rgba(218,227,244,0.18)" />
           </radialGradient>
         </defs>
         {/* Luminous disc */}
@@ -92,7 +92,7 @@ export default function ArcaneMoon() {
         {/* Arcane ring etched around it, slowly turning — wakes near the cursor */}
         <g
           className="origin-center motion-safe:animate-[sigil-spin_120s_linear_infinite]"
-          stroke="rgba(79,124,240,0.4)"
+          stroke="rgba(218,227,244,0.4)"
           fill="none"
           style={{
             opacity: "calc(0.65 + var(--moon-glow) * 0.35)",
@@ -100,10 +100,10 @@ export default function ArcaneMoon() {
           }}
         >
           <circle cx="80" cy="80" r="56" strokeWidth="0.8" strokeDasharray="3 9" />
-          <path d="M80 18 L83 24 L80 28 L77 24 Z" fill="rgba(79,124,240,0.55)" stroke="none" />
-          <path d="M80 142 L83 136 L80 132 L77 136 Z" fill="rgba(79,124,240,0.55)" stroke="none" />
-          <path d="M18 80 L24 83 L28 80 L24 77 Z" fill="rgba(79,124,240,0.55)" stroke="none" />
-          <path d="M142 80 L136 83 L132 80 L136 77 Z" fill="rgba(79,124,240,0.55)" stroke="none" />
+          <path d="M80 18 L83 24 L80 28 L77 24 Z" fill="rgba(218,227,244,0.55)" stroke="none" />
+          <path d="M80 142 L83 136 L80 132 L77 136 Z" fill="rgba(218,227,244,0.55)" stroke="none" />
+          <path d="M18 80 L24 83 L28 80 L24 77 Z" fill="rgba(218,227,244,0.55)" stroke="none" />
+          <path d="M142 80 L136 83 L132 80 L136 77 Z" fill="rgba(218,227,244,0.55)" stroke="none" />
         </g>
       </svg>
 
