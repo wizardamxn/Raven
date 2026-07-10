@@ -16,6 +16,7 @@ export default function ExperiencePage() {
       <div className="w-full text-left max-w-xl">
         <Link
           href="/"
+          transitionTypes={["page-turn"]}
           className="inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase text-parchment-500 transition-colors hover:text-ember-300"
         >
           <FiArrowLeft className="w-4 h-4" />
@@ -110,6 +111,7 @@ export default function ExperiencePage() {
           <span className="text-parchment-500 text-sm tracking-[0.3em] uppercase">Also browse</span>
           <Link
             href="/projects"
+            transitionTypes={["page-turn"]}
             className="group inline-flex items-center gap-2 font-heading text-xl sm:text-2xl font-black tracking-wide text-parchment-300 transition-colors hover:text-ember-300"
           >
             View Projects

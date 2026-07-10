@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
@@ -5,6 +6,7 @@ import { hasCaseStudy } from "@/lib/data/caseStudies";
 import ProjectLinks from "@/components/ProjectLinks";
 import ChapterHeading from "@/components/ChapterHeading";
 import CornerFlourish from "@/components/ornaments/CornerFlourish";
+import TiltCard from "@/components/fx/TiltCard";
 import type { ProjectEntry } from "@/lib/data/projects";
 
 export default function RelicsSection({ projects }: Readonly<{ projects: ProjectEntry[] }>) {
@@ -18,6 +20,7 @@ export default function RelicsSection({ projects }: Readonly<{ projects: Project
       <div className="flex justify-center mb-12 -mt-4">
         <Link
           href="/projects"
+          transitionTypes={["page-turn"]}
           className="group inline-flex items-center gap-2 text-base tracking-[0.15em] uppercase font-bold text-parchment-500 transition-colors hover:text-ember-300"
         >
           View All Projects
@@ -29,25 +32,33 @@ export default function RelicsSection({ projects }: Readonly<{ projects: Project
         {projects.map((project) => (
           <div key={project.id} className="flex flex-col group/card">
             {/* Relic display case */}
-            <div className="relative aspect-video transition-transform duration-500 group-hover/card:-translate-y-1">
-              <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt transition-all duration-500 group-hover/card:border-gilt-strong group-hover/card:shadow-[0_8px_32px_rgba(217,164,65,0.14)]">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 group-hover/card:scale-105"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
-                <CornerFlourish corner="tl" />
-                <CornerFlourish corner="tr" />
-                <CornerFlourish corner="bl" />
-                <CornerFlourish corner="br" />
+            <TiltCard className="aspect-video">
+              <div className="relative w-full h-full transition-transform duration-500 group-hover/card:-translate-y-1">
+                <ViewTransition name={`relic-${project.id}`} share="morph">
+                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt transition-all duration-500 group-hover/card:border-gilt-strong group-hover/card:shadow-[0_8px_32px_rgba(217,164,65,0.14)]">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-700 group-hover/card:scale-105"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
+                    <CornerFlourish corner="tl" />
+                    <CornerFlourish corner="tr" />
+                    <CornerFlourish corner="bl" />
+                    <CornerFlourish corner="br" />
+                  </div>
+                </ViewTransition>
               </div>
-            </div>
+            </TiltCard>
 
             {hasCaseStudy(project.id) ? (
-              <Link href={`/projects/${project.id}`} className="group/title inline-block w-fit mt-5">
+              <Link
+                href={`/projects/${project.id}`}
+                transitionTypes={["page-turn"]}
+                className="group/title inline-block w-fit mt-5"
+              >
                 <h3 className="relative inline-block font-heading text-xl font-black tracking-wide text-parchment-100 transition-colors duration-300 group-hover/card:text-ember-200">
                   {project.title}
                   <span className="absolute left-0 -bottom-1 h-px w-0 bg-ember-400 transition-all duration-300 group-hover/title:w-full" />
@@ -65,7 +76,7 @@ export default function RelicsSection({ projects }: Readonly<{ projects: Project
             {/* Interactive Tech Icons with Custom Tooltips */}
             <div className="flex flex-wrap gap-3 mt-5">
               {project.technologies.map((tech) => (
-                <div key={tech.name} className="relative group/tech">
+                <div key={tech.name} className="relative group/tech tech-chip">
                   {/* Custom Tooltip Box */}
                   <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 text-xs font-semibold tracking-wider uppercase text-parchment-100 bg-ink-900 border border-gilt-strong rounded-md whitespace-nowrap opacity-0 pointer-events-none scale-95 group-hover/tech:opacity-100 group-hover/tech:scale-100 group-hover/tech:pointer-events-auto transition-all duration-200 shadow-lg z-20">
                     {tech.name}

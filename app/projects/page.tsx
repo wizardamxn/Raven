@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import PageShell from "@/components/PageShell";
@@ -19,6 +20,7 @@ export default function ProjectsPage() {
       <div className="w-full text-left max-w-xl">
         <Link
           href="/"
+          transitionTypes={["page-turn"]}
           className="inline-flex items-center gap-2 text-sm tracking-[0.2em] uppercase text-parchment-500 transition-colors hover:text-ember-300"
         >
           <FiArrowLeft className="w-4 h-4" />
@@ -47,20 +49,22 @@ export default function ProjectsPage() {
             <article key={project.id} className="flex flex-col">
               {/* Relic display case */}
               <div className="relative aspect-video">
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 576px) 100vw, 576px"
-                    className="object-cover"
-                  />
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
-                  <CornerFlourish corner="tl" />
-                  <CornerFlourish corner="tr" />
-                  <CornerFlourish corner="bl" />
-                  <CornerFlourish corner="br" />
-                </div>
+                <ViewTransition name={`relic-${project.id}`} share="morph">
+                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 576px) 100vw, 576px"
+                      className="object-cover"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
+                    <CornerFlourish corner="tl" />
+                    <CornerFlourish corner="tr" />
+                    <CornerFlourish corner="bl" />
+                    <CornerFlourish corner="br" />
+                  </div>
+                </ViewTransition>
               </div>
 
               <span className="font-chapter text-ember-500 text-sm tracking-[0.35em] uppercase font-bold mt-6">
@@ -70,6 +74,7 @@ export default function ProjectsPage() {
               {hasCaseStudy(project.id) ? (
                 <Link
                   href={`/projects/${project.id}`}
+                  transitionTypes={["page-turn"]}
                   className="group/title inline-flex items-center gap-2 mt-1 w-fit"
                 >
                   <h2 className="font-heading text-2xl sm:text-3xl font-black tracking-wide text-parchment-100 transition-colors duration-300 group-hover/title:text-ember-200">
@@ -134,6 +139,7 @@ export default function ProjectsPage() {
           </span>
           <Link
             href="/experience"
+            transitionTypes={["page-turn"]}
             className="group inline-flex items-center gap-2 font-heading text-xl sm:text-2xl font-black tracking-wide text-parchment-300 transition-colors hover:text-ember-300"
           >
             <FiArrowLeft className="w-5 h-5 text-ember-400 transition-transform group-hover:-translate-x-1" />

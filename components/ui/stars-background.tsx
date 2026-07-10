@@ -5,6 +5,13 @@
 // of warm ember-gold stars, gentler opacity, reduced-motion aware.
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { subscribeFrame } from "@/lib/fx/frame-loop";
+import { getPointer, initPointer } from "@/lib/fx/pointer";
+
+// Constellation whisper — stars near a fine pointer link up with faint gilt
+// threads. Stars are bucketed into a coarse grid so each frame only distance-
+// checks the 3×3 cells around the cursor.
+const CELL = 130;
 
 interface StarProps {
   x: number;
@@ -96,7 +103,16 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationFrameId = 0;
+    // Spatial grid for the constellation effect.
+    const grid = new Map<string, StarProps[]>();
+    for (const star of stars) {
+      const key = `${Math.floor(star.x / CELL)},${Math.floor(star.y / CELL)}`;
+      const bucket = grid.get(key);
+      if (bucket) bucket.push(star);
+      else grid.set(key, [star]);
+    }
+    const finePointer = globalThis.matchMedia("(pointer: fine)").matches;
+    if (finePointer) initPointer();
 
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -112,23 +128,55 @@ export const StarsBackground: React.FC<StarBackgroundProps> = ({
             Math.abs(Math.sin((Date.now() * 0.001) / star.twinkleSpeed) * 0.5);
         }
       }
-      animationFrameId = requestAnimationFrame(render);
+
+      if (!finePointer) return;
+      const p = getPointer();
+      if (!p.active) return;
+
+      // Gather stars within reach of the cursor from the neighboring cells.
+      const near: StarProps[] = [];
+      const pcx = Math.floor(p.x / CELL);
+      const pcy = Math.floor(p.y / CELL);
+      for (let gx = pcx - 1; gx <= pcx + 1; gx++) {
+        for (let gy = pcy - 1; gy <= pcy + 1; gy++) {
+          const bucket = grid.get(`${gx},${gy}`);
+          if (!bucket) continue;
+          for (const s of bucket) {
+            if (Math.hypot(s.x - p.x, s.y - p.y) < CELL) near.push(s);
+          }
+        }
+      }
+
+      // Thread faint gilt lines between mutually close stars.
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i < near.length; i++) {
+        for (let j = i + 1; j < near.length; j++) {
+          const a = near[i];
+          const b = near[j];
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d > 110) continue;
+          const midDist = Math.hypot(
+            (a.x + b.x) / 2 - p.x,
+            (a.y + b.y) / 2 - p.y
+          );
+          const alpha = Math.max(0, 1 - midDist / CELL) * 0.3;
+          if (alpha < 0.02) continue;
+          ctx.strokeStyle = `rgba(217, 164, 65, ${alpha.toFixed(3)})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
     };
 
-    // Static sky under reduced motion — draw once, no loop.
+    // Static sky under reduced motion — draw once, no shared-loop subscription.
     if (stars.every((s) => s.twinkleSpeed === null)) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (const star of stars) {
-        ctx.beginPath();
-        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${star.color}, ${star.opacity})`;
-        ctx.fill();
-      }
+      render();
       return;
     }
 
-    render();
-    return () => cancelAnimationFrame(animationFrameId);
+    return subscribeFrame(render);
   }, [stars]);
 
   return (

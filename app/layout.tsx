@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Alex_Brush, Cinzel_Decorative } from "next/font/google";
 import { ReactLenis } from "lenis/react";
+import MotionProvider from "@/components/providers/MotionProvider";
+import SoundProvider from "@/components/providers/SoundProvider";
+import Incantations from "@/components/Incantations";
+import HoverSfx from "@/components/HoverSfx";
 import MagicCursor from "@/components/MagicCursor";
 import GaiaTree from "@/components/GaiaTree";
 import TomeNav from "@/components/TomeNav";
@@ -85,17 +89,23 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <GaiaTree />
-        {/* Candlelit vignette — heavy ink closing in on the light */}
-        <div
-          aria-hidden
-          className="fixed inset-0 z-0 pointer-events-none select-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_42%,rgba(2,1,4,0.65)_100%)]"
-        />
-        <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
-          <MagicCursor />
-          <TomeNav />
-          {children}
-        </ReactLenis>
+        <MotionProvider>
+          <GaiaTree />
+          {/* Candlelit vignette — heavy ink closing in on the light */}
+          <div
+            aria-hidden
+            className="fixed inset-0 z-0 pointer-events-none select-none bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_42%,rgba(2,1,4,0.65)_100%)]"
+          />
+          <SoundProvider>
+            <HoverSfx />
+            <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
+              <MagicCursor />
+              <Incantations />
+              <TomeNav />
+              {children}
+            </ReactLenis>
+          </SoundProvider>
+        </MotionProvider>
       </body>
     </html>
   );

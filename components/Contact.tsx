@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { FiGithub, FiLinkedin, FiMail, FiCopy, FiCheck, FiFileText, FiInstagram } from "react-icons/fi";
 import { SiDiscord } from "react-icons/si";
-import { GiRaven } from "react-icons/gi";
 import ChapterHeading from "@/components/ChapterHeading";
+import WaxSeal from "@/components/WaxSeal";
+import { useSound } from "@/components/providers/SoundProvider";
 
 const EMAIL = "amank225566@gmail.com";
 const DISCORD = "wizardamxn";
@@ -14,9 +15,11 @@ const socialClass =
 
 export default function Contact() {
   const [copiedItem, setCopiedItem] = useState<"email" | "discord" | null>(null);
+  const { play } = useSound();
 
   const copy = async (text: string, item: "email" | "discord") => {
     await navigator.clipboard.writeText(text);
+    play("tap");
     setCopiedItem(item);
     setTimeout(() => setCopiedItem(null), 2000);
   };
@@ -30,26 +33,7 @@ export default function Contact() {
       </p>
 
       {/* The wax seal — press to dispatch a raven */}
-      <div className="flex justify-center mb-10">
-        <a
-          href={`mailto:${EMAIL}`}
-          aria-label="Send an email"
-          className="group relative flex items-center justify-center w-24 h-24 rounded-full
-                     bg-[radial-gradient(circle_at_35%_30%,#a84040_0%,#8c2f2f_45%,#5c1d1d_100%)]
-                     border border-gilt-strong
-                     shadow-[0_6px_24px_rgba(0,0,0,0.7),inset_0_2px_6px_rgba(255,255,255,0.12),inset_0_-4px_10px_rgba(0,0,0,0.45)]
-                     transition-transform duration-300 hover:scale-105 focus-visible:scale-105"
-        >
-          {/* Seal impression ring */}
-          <span aria-hidden className="absolute inset-2 rounded-full border border-ember-200/25" />
-          {/* Candle glow on hover */}
-          <span
-            aria-hidden
-            className="absolute -inset-3 rounded-full bg-[radial-gradient(circle,rgba(217,164,65,0.25)_0%,rgba(217,164,65,0)_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          />
-          <GiRaven className="relative w-9 h-9 text-ember-200 drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] transition-transform duration-300 group-hover:-rotate-12" />
-        </a>
-      </div>
+      <WaxSeal email={EMAIL} />
 
       {/* Email row */}
       <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-ink-800/70 border border-gilt mb-3">

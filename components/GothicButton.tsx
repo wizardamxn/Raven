@@ -2,6 +2,7 @@
 
 import { type ReactNode } from "react";
 import Link from "next/link";
+import { useSound } from "@/components/providers/SoundProvider";
 
 type Variant = "primary" | "ghost";
 
@@ -26,7 +27,9 @@ export default function GothicButton({
   icon?: ReactNode;
   variant?: Variant;
 }>) {
+  const { play } = useSound();
   const buttonClass = `${base} ${variantClass[variant]}`;
+  const onClick = variant === "primary" ? () => play("tap") : undefined;
   const content = (
     <>
       {icon}
@@ -36,7 +39,7 @@ export default function GothicButton({
 
   if (!href) {
     return (
-      <button type="button" className={buttonClass}>
+      <button type="button" onClick={onClick} className={buttonClass}>
         {content}
       </button>
     );
@@ -51,6 +54,7 @@ export default function GothicButton({
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noreferrer" : undefined}
         download={isFile || undefined}
+        onClick={onClick}
         className={buttonClass}
       >
         {content}
@@ -59,7 +63,7 @@ export default function GothicButton({
   }
 
   return (
-    <Link href={href} className={buttonClass}>
+    <Link href={href} onClick={onClick} className={buttonClass}>
       {content}
     </Link>
   );

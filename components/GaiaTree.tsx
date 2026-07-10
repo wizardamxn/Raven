@@ -1,6 +1,11 @@
 import { StarsBackground } from "@/components/ui/stars-background";
 import { ShootingStars } from "@/components/ui/shooting-stars";
 import AuroraVeil from "@/components/ui/aurora-veil";
+import ParallaxLayer from "@/components/fx/ParallaxLayer";
+import ArcaneMoon from "@/components/fx/ArcaneMoon";
+import EmberVeil from "@/components/fx/EmberVeil";
+import ScrollLitWindows from "@/components/fx/ScrollLitWindows";
+import MeteorShower from "@/components/fx/MeteorShower";
 
 // The night scene — everything that lives behind the tome.
 // A gothic abbey skyline under an arcane sky: aurora ribbons, a living
@@ -9,70 +14,22 @@ import AuroraVeil from "@/components/ui/aurora-veil";
 // window, ground fog, and warm candle light rising behind the tome.
 // Silhouettes and light only — no drawn objects to get ugly up close.
 
-// A tiny lancet (pointed-arch) window, lit from within.
-function LitWindow({
-  x,
-  y,
-  duration,
-}: Readonly<{ x: number; y: number; duration: number }>) {
-  return (
-    <path
-      d="M-1.6 2.6 L-1.6 -0.4 Q0 -2.8 1.6 -0.4 L1.6 2.6 Z"
-      transform={`translate(${x} ${y})`}
-      fill="#eec776"
-      opacity="0.7"
-      className="motion-safe:animate-[candle-flicker_var(--dur)_ease-in-out_infinite]"
-      style={{ "--dur": `${duration}s` } as React.CSSProperties}
-    />
-  );
-}
-
 export default function GaiaTree() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden select-none"
+      className="night-scene pointer-events-none fixed inset-0 z-0 overflow-hidden select-none transition-[filter] duration-1000"
     >
       {/* ── The arcane sky — aurora ribbons, twinkling starfield, falling stars ── */}
       <AuroraVeil />
       <StarsBackground />
       <ShootingStars />
+      <MeteorShower />
 
-      {/* ── The moon — rune-ringed anchor of the scene ── */}
-      <div className="absolute right-[7vw] top-[8vh] hidden md:block">
-        {/* Wide halo */}
-        <div className="absolute -inset-28 rounded-full bg-[radial-gradient(circle,rgba(246,223,164,0.14)_0%,rgba(246,223,164,0.05)_45%,rgba(246,223,164,0)_70%)]" />
-        <svg viewBox="0 0 160 160" className="relative h-36 w-36 lg:h-44 lg:w-44">
-          <defs>
-            <radialGradient id="moon-glow" cx="0.42" cy="0.4" r="0.75">
-              <stop offset="0" stopColor="rgba(250,238,205,0.6)" />
-              <stop offset="0.55" stopColor="rgba(246,223,164,0.35)" />
-              <stop offset="1" stopColor="rgba(217,164,65,0.18)" />
-            </radialGradient>
-          </defs>
-          {/* Luminous disc */}
-          <circle cx="80" cy="80" r="38" fill="url(#moon-glow)" />
-          {/* Arcane ring etched around it, slowly turning */}
-          <g
-            className="origin-center motion-safe:animate-[sigil-spin_120s_linear_infinite]"
-            stroke="rgba(217,164,65,0.4)"
-            fill="none"
-          >
-            <circle cx="80" cy="80" r="56" strokeWidth="0.8" strokeDasharray="3 9" />
-            <path d="M80 18 L83 24 L80 28 L77 24 Z" fill="rgba(217,164,65,0.55)" stroke="none" />
-            <path d="M80 142 L83 136 L80 132 L77 136 Z" fill="rgba(217,164,65,0.55)" stroke="none" />
-            <path d="M18 80 L24 83 L28 80 L24 77 Z" fill="rgba(217,164,65,0.55)" stroke="none" />
-            <path d="M142 80 L136 83 L132 80 L136 77 Z" fill="rgba(217,164,65,0.55)" stroke="none" />
-          </g>
-        </svg>
-
-        {/* The distant flock, crossing the halo */}
-        <svg viewBox="0 0 100 40" className="absolute -left-16 top-4 h-10 w-24 text-parchment-300/50" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
-          <path d="M10 20 Q14 16 18 20 Q22 16 26 20" />
-          <path d="M44 10 Q47 7 50 10 Q53 7 56 10" transform="scale(0.8)" />
-          <path d="M70 30 Q73 27 76 30 Q79 27 82 30" transform="scale(0.7) translate(30 14)" />
-        </svg>
-      </div>
+      {/* ── The moon — rune-ringed anchor of the scene, aware of the cursor ── */}
+      <ParallaxLayer speed={0.12} className="absolute right-[7vw] top-[8vh] hidden md:block">
+        <ArcaneMoon />
+      </ParallaxLayer>
 
       {/* Mobile moon — smaller, same design */}
       <div className="absolute right-5 top-20 md:hidden opacity-80">
@@ -84,16 +41,19 @@ export default function GaiaTree() {
       </div>
 
       {/* ── Moonlight — one soft blurred shaft falling from the moon ── */}
-      <div className="absolute right-[-4vw] top-[4vh] h-[80vh] w-[30vw] origin-top-right rotate-18 blur-3xl bg-linear-to-b from-[rgba(246,223,164,0.07)] via-[rgba(246,223,164,0.025)] to-transparent hidden md:block" />
+      <ParallaxLayer speed={0.1} className="absolute right-[-4vw] top-[4vh] h-[80vh] w-[30vw] hidden md:block">
+        <div className="h-full w-full origin-top-right rotate-18 blur-3xl bg-linear-to-b from-[rgba(246,223,164,0.07)] via-[rgba(246,223,164,0.025)] to-transparent" />
+      </ParallaxLayer>
 
       {/* Soft light bloom crowning the tome's arch */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 h-[38vh] w-[60vw] bg-[radial-gradient(ellipse_at_50%_0%,rgba(217,164,65,0.07)_0%,rgba(217,164,65,0)_65%)]" />
 
       {/* ── The horizon — a gothic abbey skyline in silhouette ── */}
+      <ParallaxLayer speed={0.05} className="absolute bottom-0 inset-x-0 h-[34vh]">
       <svg
         viewBox="0 0 1440 340"
         preserveAspectRatio="xMidYMax slice"
-        className="absolute bottom-0 inset-x-0 w-full h-[34vh]"
+        className="w-full h-full"
       >
         {/* Distant abbey masses — faintest */}
         <path
@@ -141,14 +101,10 @@ export default function GaiaTree() {
           />
         </g>
 
-        {/* Windows still candlelit across the skyline */}
-        <LitWindow x={54} y={250} duration={8} />
-        <LitWindow x={202} y={230} duration={6} />
-        <LitWindow x={414} y={248} duration={9} />
-        <LitWindow x={682} y={258} duration={7} />
-        <LitWindow x={884} y={196} duration={10} />
-        <LitWindow x={1372} y={266} duration={8} />
+        {/* Windows catching candlelight as the reader descends */}
+        <ScrollLitWindows />
       </svg>
+      </ParallaxLayer>
 
       {/* ── Warm candle light rising behind the tome ── */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[42vh] w-[95vw] bg-[radial-gradient(ellipse_at_50%_100%,rgba(217,164,65,0.12)_0%,rgba(217,164,65,0.04)_45%,rgba(217,164,65,0)_70%)] motion-safe:animate-[candle-flicker_9s_ease-in-out_infinite]" />
@@ -157,6 +113,9 @@ export default function GaiaTree() {
       <div className="absolute bottom-0 inset-x-0 h-52 bg-linear-to-t from-ink-700/70 via-ink-800/35 to-transparent" />
       <div className="absolute -bottom-10 left-0 h-64 w-[50vw] bg-[radial-gradient(ellipse_at_15%_100%,rgba(34,26,48,0.75)_0%,rgba(34,26,48,0)_70%)] motion-safe:animate-[mist-drift_26s_ease-in-out_infinite]" />
       <div className="absolute -bottom-10 right-0 h-64 w-[50vw] bg-[radial-gradient(ellipse_at_85%_100%,rgba(34,26,48,0.75)_0%,rgba(34,26,48,0)_70%)] motion-safe:animate-[mist-drift_34s_ease-in-out_-12s_infinite]" />
+
+      {/* ── Embers drifting up through the fog, parting around the cursor ── */}
+      <EmberVeil />
     </div>
   );
 }
