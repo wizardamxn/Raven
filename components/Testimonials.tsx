@@ -20,7 +20,7 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <div className="w-full max-w-xl text-left">
-      <ChapterHeading kicker="Social Proof" title="What They Say" />
+      <ChapterHeading numeral="Chapter II" kicker="Social Proof" title="What They Say" />
 
       <div className="flex flex-col gap-5">
         {testimonials.map((t) => (

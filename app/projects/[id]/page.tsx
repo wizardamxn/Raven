@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -141,6 +142,7 @@ export default async function CaseStudyPage({
       <div className="w-full text-left max-w-2xl mx-auto px-4 sm:px-6">
         <Link
           href="/projects"
+          transitionTypes={["page-turn"]}
           className="inline-flex items-center gap-2 text-[13px] tracking-[0.2em] uppercase text-parchment-500 transition-colors hover:text-ember-300"
         >
           <FiArrowLeft className="w-4 h-4" />
@@ -149,20 +151,22 @@ export default async function CaseStudyPage({
 
         <div className="mt-12 mb-16 text-center">
           <div className="relative aspect-video mb-10">
-            <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(max-width: 672px) 100vw, 672px"
-                className="object-cover"
-              />
-              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
-              <CornerFlourish corner="tl" />
-              <CornerFlourish corner="tr" />
-              <CornerFlourish corner="bl" />
-              <CornerFlourish corner="br" />
-            </div>
+            <ViewTransition name={`relic-${project.id}`} share="morph">
+              <div className="relative w-full h-full rounded-xl overflow-hidden bg-ink-800 border border-gilt">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 672px) 100vw, 672px"
+                  className="object-cover"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0)_55%,rgba(6,4,10,0.6)_100%)]" />
+                <CornerFlourish corner="tl" />
+                <CornerFlourish corner="tr" />
+                <CornerFlourish corner="bl" />
+                <CornerFlourish corner="br" />
+              </div>
+            </ViewTransition>
           </div>
 
           <span className="block text-[13px] tracking-[0.4em] text-ember-400 uppercase font-black mb-3">
@@ -183,7 +187,7 @@ export default async function CaseStudyPage({
         </div>
 
         {/* The illuminated reading panel */}
-        <article className="manuscript rounded-xl bg-[#120d18] border border-gilt-faint px-6 sm:px-10 py-10 shadow-[inset_0_1px_0_rgba(246,223,164,0.04)]">
+        <article className="manuscript rounded-xl bg-[#120d18] border border-gilt-faint px-6 sm:px-10 py-10 shadow-[inset_0_1px_0_rgba(246,249,255,0.04)]">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={markdownComponents}
@@ -198,6 +202,7 @@ export default async function CaseStudyPage({
           </span>
           <Link
             href="/projects"
+            transitionTypes={["page-turn"]}
             className="group inline-flex items-center gap-2 font-heading text-[19px] sm:text-[21px] font-bold tracking-wide text-parchment-300 transition-colors hover:text-ember-300"
           >
             <FiArrowLeft className="w-5 h-5 text-ember-400 transition-transform group-hover:-translate-x-1" />

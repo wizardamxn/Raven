@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLenis } from "lenis/react";
 import { GiRaven } from "react-icons/gi";
+import SoundToggle from "@/components/SoundToggle";
 
 const links = [
   { href: "/", label: "Home" },
@@ -82,6 +83,20 @@ export default function TomeNav() {
     />
   );
 
+  // Tiny gem above the chapter you're reading
+  const activeGem = (active: boolean) =>
+    active ? (
+      <span
+        aria-hidden
+        className="absolute left-1/2 -translate-x-1/2 -top-0.5 w-1 h-1 rotate-45 bg-ember-400 shadow-[0_0_6px_rgba(218,227,244,0.8)]"
+      />
+    ) : null;
+
+  // Gilt diamond separating the desktop links
+  const diamond = (
+    <span aria-hidden className="block w-1 h-1 rotate-45 bg-ember-500/40 select-none" />
+  );
+
   return (
     <header
       className={`fixed top-0 inset-x-0 z-40 transition-all duration-300 ${
@@ -98,6 +113,7 @@ export default function TomeNav() {
         {/* Sigil + name */}
         <Link
           href="/"
+          transitionTypes={["page-turn"]}
           className="group flex items-center gap-3 text-parchment-100 hover:text-ember-200 transition-colors duration-200"
         >
           <GiRaven className="w-6 h-6 text-ember-400 transition-transform duration-300 group-hover:-rotate-12" />
@@ -106,42 +122,55 @@ export default function TomeNav() {
           </span>
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
-          {links.map((link) =>
-            link.href === "/#contact" ? (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={handleContactClick}
-                className={linkClass(false)}
-              >
-                {link.label}
-                {underline(false)}
-              </Link>
-            ) : (
-              <Link key={link.href} href={link.href} className={linkClass(isActive(link.href))}>
-                {link.label}
-                {underline(isActive(link.href))}
-              </Link>
-            )
-          )}
-        </div>
+        {/* Right cluster: links, sound, mobile menu */}
+        <div className="flex items-center gap-4 sm:gap-5">
+          {/* Desktop links */}
+          <div className="hidden md:flex items-center gap-6">
+            {links.map((link, i) => (
+              <Fragment key={link.href}>
+                {i > 0 && diamond}
+                {link.href === "/#contact" ? (
+                  <Link
+                    href={link.href}
+                    transitionTypes={["page-turn"]}
+                    onClick={handleContactClick}
+                    className={linkClass(false)}
+                  >
+                    {link.label}
+                    {underline(false)}
+                  </Link>
+                ) : (
+                  <Link
+                    href={link.href}
+                    transitionTypes={["page-turn"]}
+                    className={linkClass(isActive(link.href))}
+                  >
+                    {link.label}
+                    {underline(isActive(link.href))}
+                    {activeGem(isActive(link.href))}
+                  </Link>
+                )}
+              </Fragment>
+            ))}
+          </div>
 
-        {/* Mobile: wax-seal toggle */}
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Close navigation" : "Open navigation"}
-          aria-expanded={open}
-          className="md:hidden relative flex items-center justify-center w-10 h-10 rounded-full border border-gilt-strong bg-linear-to-b from-wax-500 to-wax-600 shadow-[0_2px_12px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.12)]"
-        >
-          <GiRaven
-            className={`w-5 h-5 text-ember-200 transition-transform duration-300 ${
-              open ? "rotate-12 scale-110" : ""
-            }`}
-          />
-        </button>
+          <SoundToggle />
+
+          {/* Mobile: wax-seal toggle */}
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? "Close navigation" : "Open navigation"}
+            aria-expanded={open}
+            className="md:hidden relative flex items-center justify-center w-10 h-10 rounded-full border border-gilt-strong bg-linear-to-b from-wax-500 to-wax-600 shadow-[0_2px_12px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.12)]"
+          >
+            <GiRaven
+              className={`w-5 h-5 text-ember-200 transition-transform duration-300 ${
+                open ? "rotate-12 scale-110" : ""
+              }`}
+            />
+          </button>
+        </div>
 
         {/* Mobile dropdown */}
         <div
@@ -155,6 +184,7 @@ export default function TomeNav() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  transitionTypes={["page-turn"]}
                   onClick={handleContactClick}
                   className="py-3 text-sm tracking-[0.25em] uppercase font-bold text-parchment-300 hover:text-ember-300 transition-colors border-b border-gilt-faint last:border-0"
                 >
@@ -164,6 +194,7 @@ export default function TomeNav() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  transitionTypes={["page-turn"]}
                   onClick={() => setOpen(false)}
                   className={`py-3 text-sm tracking-[0.25em] uppercase font-bold transition-colors border-b border-gilt-faint last:border-0 ${
                     isActive(link.href)
@@ -178,8 +209,13 @@ export default function TomeNav() {
           </div>
         </div>
       </nav>
-      {/* Gilt hairline */}
-      <div aria-hidden className="h-px w-full bg-linear-to-r from-transparent via-gilt-strong to-transparent" />
+      {/* Gilt hairline — brightens once the reader descends */}
+      <div
+        aria-hidden
+        className={`h-px w-full bg-linear-to-r from-transparent to-transparent transition-colors duration-300 ${
+          scrolled ? "via-ember-400/70" : "via-gilt-strong"
+        }`}
+      />
     </header>
   );
 }

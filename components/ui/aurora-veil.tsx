@@ -12,7 +12,7 @@ export default function AuroraVeil() {
       style={
         {
           "--aurora":
-            "repeating-linear-gradient(100deg,#b07f24 10%,#7c5cd6 15%,#eec776 20%,#5b3fa8 25%,#d9a441 30%)",
+            "repeating-linear-gradient(100deg,#8a94a8 10%,#7c5cd6 15%,#edf2fb 20%,#5b3fa8 25%,#dae3f4 30%)",
           "--dark-gradient":
             "repeating-linear-gradient(100deg,#06040a 0%,#06040a 7%,transparent 10%,transparent 12%,#06040a 16%)",
         } as React.CSSProperties

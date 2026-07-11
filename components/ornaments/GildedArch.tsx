@@ -19,7 +19,7 @@ export default function GildedArch() {
           d="M320 6 L326 22 L320 30 L314 22 Z"
           stroke="currentColor"
           strokeWidth="1.4"
-          fill="rgba(217,164,65,0.15)"
+          fill="rgba(218,227,244,0.15)"
         />
         <circle cx="320" cy="38" r="2" fill="currentColor" />
         {/* Arch sweep */}
@@ -38,8 +38,8 @@ export default function GildedArch() {
           opacity="0.45"
         />
         {/* Hanging side finials */}
-        <path d="M150 56 L154 64 L150 72 L146 64 Z" stroke="currentColor" strokeWidth="1" fill="rgba(217,164,65,0.1)" opacity="0.8" />
-        <path d="M490 56 L494 64 L490 72 L486 64 Z" stroke="currentColor" strokeWidth="1" fill="rgba(217,164,65,0.1)" opacity="0.8" />
+        <path d="M150 56 L154 64 L150 72 L146 64 Z" stroke="currentColor" strokeWidth="1" fill="rgba(218,227,244,0.1)" opacity="0.8" />
+        <path d="M490 56 L494 64 L490 72 L486 64 Z" stroke="currentColor" strokeWidth="1" fill="rgba(218,227,244,0.1)" opacity="0.8" />
         {/* Vine curls near the crown */}
         <path
           d="M290 44 C280 36 268 34 258 38 M350 44 C360 36 372 34 382 38"
